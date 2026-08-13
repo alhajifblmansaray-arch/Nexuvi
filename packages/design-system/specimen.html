@@ -1,0 +1,1496 @@
+<title>Nexuvi Design System — Token Specimen</title>
+<style>
+:root {
+  --nx-color-surface-page: #fafafa;
+  --nx-color-surface-raised: #ffffff;
+  --nx-color-surface-sunken: #f4f5f6;
+  --nx-color-surface-overlay: #ffffff;
+  --nx-color-surface-hover: #f4f5f6;
+  --nx-color-surface-selected: #f6f2fd;
+  --nx-color-surface-disabled: #f4f5f6;
+  --nx-color-text-primary: #131619;
+  --nx-color-text-secondary: #414850;
+  --nx-color-text-muted: #5c646d;
+  --nx-color-text-disabled: #adb3ba;
+  --nx-color-text-on-action: #ffffff;
+  --nx-color-text-on-status: #ffffff;
+  --nx-color-text-link: #573b8b;
+  --nx-color-border-subtle: #e8eaec;
+  --nx-color-border-default: #d5d8dc;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #8763cb;
+  --nx-color-action-primary: #131619;
+  --nx-color-action-primary-hover: #272c32;
+  --nx-color-action-primary-active: #414850;
+  --nx-color-action-primary-subtle: #f4f5f6;
+  --nx-color-action-secondary: #414850;
+  --nx-color-action-secondary-hover: #272c32;
+  --nx-color-action-secondary-subtle: #f4f5f6;
+  --nx-color-status-success: #0f8169;
+  --nx-color-status-success-subtle: #ecfaf5;
+  --nx-color-status-warning: #947420;
+  --nx-color-status-warning-subtle: #fdf8ea;
+  --nx-color-status-danger: #ab3a3a;
+  --nx-color-status-danger-subtle: #fdf2f2;
+  --nx-color-status-info: #6d4bad;
+  --nx-color-status-info-subtle: #f6f2fd;
+  --nx-color-clinical-critical: #b34418;
+  --nx-color-clinical-critical-subtle: #fff3ee;
+  --nx-color-clinical-allergy: #8d3613;
+  --nx-color-clinical-allergy-subtle: #ffe0d3;
+  --nx-color-clinical-controlled: #422d69;
+  --nx-color-clinical-sensitive: #272c32;
+  --nx-color-clinical-break-glass: #6b290f;
+  --nx-color-platform-offline: #5c646d;
+  --nx-color-platform-sync-pending: #947420;
+  --nx-color-platform-support-session: #573b8b;
+  --font-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+  --r-sm: 0.375rem;
+  --r-md: 0.625rem;
+  --r-lg: 1rem;
+  --r-xl: 1.25rem;
+  --r-2xl: 1.75rem;
+  --r-full: 9999px;
+  --sh-xs: 0 1px 2px 0 rgb(19 22 25 / 0.04);
+  --sh-sm: 0 2px 6px -1px rgb(19 22 25 / 0.06), 0 1px 2px 0 rgb(19 22 25 / 0.04);
+  --sh-md: 0 6px 16px -4px rgb(19 22 25 / 0.08), 0 2px 6px -2px rgb(19 22 25 / 0.05);
+  --sh-lg: 0 16px 32px -8px rgb(19 22 25 / 0.10), 0 4px 10px -4px rgb(19 22 25 / 0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --nx-color-surface-page: #131619;
+  --nx-color-surface-raised: #272c32;
+  --nx-color-surface-sunken: #0b0d0f;
+  --nx-color-surface-overlay: #272c32;
+  --nx-color-surface-hover: #414850;
+  --nx-color-surface-selected: #2c1e46;
+  --nx-color-surface-disabled: #272c32;
+  --nx-color-text-primary: #fafafa;
+  --nx-color-text-secondary: #d5d8dc;
+  --nx-color-text-muted: #adb3ba;
+  --nx-color-text-disabled: #5c646d;
+  --nx-color-text-on-action: #131619;
+  --nx-color-text-on-status: #131619;
+  --nx-color-text-link: #bfa6ec;
+  --nx-color-border-subtle: #272c32;
+  --nx-color-border-default: #414850;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #bfa6ec;
+  --nx-color-action-primary: #fafafa;
+  --nx-color-action-primary-hover: #ffffff;
+  --nx-color-action-primary-active: #e8eaec;
+  --nx-color-action-primary-subtle: #272c32;
+  --nx-color-action-secondary: #d5d8dc;
+  --nx-color-action-secondary-hover: #e8eaec;
+  --nx-color-action-secondary-subtle: #272c32;
+  --nx-color-status-success: #63d3b4;
+  --nx-color-status-success-subtle: #06332b;
+  --nx-color-status-warning: #eac961;
+  --nx-color-status-warning-subtle: #3a2d0e;
+  --nx-color-status-danger: #ee9494;
+  --nx-color-status-danger-subtle: #461818;
+  --nx-color-status-info: #bfa6ec;
+  --nx-color-status-info-subtle: #2c1e46;
+  --nx-color-clinical-critical: #fb9366;
+  --nx-color-clinical-critical-subtle: #471c0a;
+  --nx-color-clinical-allergy: #ffbc9f;
+  --nx-color-clinical-allergy-subtle: #471c0a;
+  --nx-color-clinical-controlled: #d8c8f5;
+  --nx-color-clinical-sensitive: #e8eaec;
+  --nx-color-clinical-break-glass: #ffbc9f;
+  --nx-color-platform-offline: #adb3ba;
+  --nx-color-platform-sync-pending: #eac961;
+  --nx-color-platform-support-session: #bfa6ec;
+  }
+}
+:root[data-theme="dark"] {
+  --nx-color-surface-page: #131619;
+  --nx-color-surface-raised: #272c32;
+  --nx-color-surface-sunken: #0b0d0f;
+  --nx-color-surface-overlay: #272c32;
+  --nx-color-surface-hover: #414850;
+  --nx-color-surface-selected: #2c1e46;
+  --nx-color-surface-disabled: #272c32;
+  --nx-color-text-primary: #fafafa;
+  --nx-color-text-secondary: #d5d8dc;
+  --nx-color-text-muted: #adb3ba;
+  --nx-color-text-disabled: #5c646d;
+  --nx-color-text-on-action: #131619;
+  --nx-color-text-on-status: #131619;
+  --nx-color-text-link: #bfa6ec;
+  --nx-color-border-subtle: #272c32;
+  --nx-color-border-default: #414850;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #bfa6ec;
+  --nx-color-action-primary: #fafafa;
+  --nx-color-action-primary-hover: #ffffff;
+  --nx-color-action-primary-active: #e8eaec;
+  --nx-color-action-primary-subtle: #272c32;
+  --nx-color-action-secondary: #d5d8dc;
+  --nx-color-action-secondary-hover: #e8eaec;
+  --nx-color-action-secondary-subtle: #272c32;
+  --nx-color-status-success: #63d3b4;
+  --nx-color-status-success-subtle: #06332b;
+  --nx-color-status-warning: #eac961;
+  --nx-color-status-warning-subtle: #3a2d0e;
+  --nx-color-status-danger: #ee9494;
+  --nx-color-status-danger-subtle: #461818;
+  --nx-color-status-info: #bfa6ec;
+  --nx-color-status-info-subtle: #2c1e46;
+  --nx-color-clinical-critical: #fb9366;
+  --nx-color-clinical-critical-subtle: #471c0a;
+  --nx-color-clinical-allergy: #ffbc9f;
+  --nx-color-clinical-allergy-subtle: #471c0a;
+  --nx-color-clinical-controlled: #d8c8f5;
+  --nx-color-clinical-sensitive: #e8eaec;
+  --nx-color-clinical-break-glass: #ffbc9f;
+  --nx-color-platform-offline: #adb3ba;
+  --nx-color-platform-sync-pending: #eac961;
+  --nx-color-platform-support-session: #bfa6ec;
+}
+:root[data-theme="light"] {
+  --nx-color-surface-page: #fafafa;
+  --nx-color-surface-raised: #ffffff;
+  --nx-color-surface-sunken: #f4f5f6;
+  --nx-color-surface-overlay: #ffffff;
+  --nx-color-surface-hover: #f4f5f6;
+  --nx-color-surface-selected: #f6f2fd;
+  --nx-color-surface-disabled: #f4f5f6;
+  --nx-color-text-primary: #131619;
+  --nx-color-text-secondary: #414850;
+  --nx-color-text-muted: #5c646d;
+  --nx-color-text-disabled: #adb3ba;
+  --nx-color-text-on-action: #ffffff;
+  --nx-color-text-on-status: #ffffff;
+  --nx-color-text-link: #573b8b;
+  --nx-color-border-subtle: #e8eaec;
+  --nx-color-border-default: #d5d8dc;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #8763cb;
+  --nx-color-action-primary: #131619;
+  --nx-color-action-primary-hover: #272c32;
+  --nx-color-action-primary-active: #414850;
+  --nx-color-action-primary-subtle: #f4f5f6;
+  --nx-color-action-secondary: #414850;
+  --nx-color-action-secondary-hover: #272c32;
+  --nx-color-action-secondary-subtle: #f4f5f6;
+  --nx-color-status-success: #0f8169;
+  --nx-color-status-success-subtle: #ecfaf5;
+  --nx-color-status-warning: #947420;
+  --nx-color-status-warning-subtle: #fdf8ea;
+  --nx-color-status-danger: #ab3a3a;
+  --nx-color-status-danger-subtle: #fdf2f2;
+  --nx-color-status-info: #6d4bad;
+  --nx-color-status-info-subtle: #f6f2fd;
+  --nx-color-clinical-critical: #b34418;
+  --nx-color-clinical-critical-subtle: #fff3ee;
+  --nx-color-clinical-allergy: #8d3613;
+  --nx-color-clinical-allergy-subtle: #ffe0d3;
+  --nx-color-clinical-controlled: #422d69;
+  --nx-color-clinical-sensitive: #272c32;
+  --nx-color-clinical-break-glass: #6b290f;
+  --nx-color-platform-offline: #5c646d;
+  --nx-color-platform-sync-pending: #947420;
+  --nx-color-platform-support-session: #573b8b;
+}
+
+[data-tenant="freetown"] {
+  --nx-color-surface-page: #fafafa;
+  --nx-color-surface-raised: #ffffff;
+  --nx-color-surface-sunken: #f4f5f6;
+  --nx-color-surface-overlay: #ffffff;
+  --nx-color-surface-hover: #f4f5f6;
+  --nx-color-surface-selected: #f6f7f6;
+  --nx-color-surface-disabled: #f4f5f6;
+  --nx-color-text-primary: #131619;
+  --nx-color-text-secondary: #414850;
+  --nx-color-text-muted: #5c646d;
+  --nx-color-text-disabled: #adb3ba;
+  --nx-color-text-on-action: #ffffff;
+  --nx-color-text-on-status: #ffffff;
+  --nx-color-text-link: #184d43;
+  --nx-color-border-subtle: #e8eaec;
+  --nx-color-border-default: #d5d8dc;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #1a5147;
+  --nx-color-action-primary: #1a5147;
+  --nx-color-action-primary-hover: #184c43;
+  --nx-color-action-primary-active: #16473e;
+  --nx-color-action-primary-subtle: #f4f4f4;
+  --nx-color-action-secondary: #414850;
+  --nx-color-action-secondary-hover: #272c32;
+  --nx-color-action-secondary-subtle: #f4f5f6;
+  --nx-color-status-success: #0f8169;
+  --nx-color-status-success-subtle: #ecfaf5;
+  --nx-color-status-warning: #947420;
+  --nx-color-status-warning-subtle: #fdf8ea;
+  --nx-color-status-danger: #ab3a3a;
+  --nx-color-status-danger-subtle: #fdf2f2;
+  --nx-color-status-info: #6d4bad;
+  --nx-color-status-info-subtle: #f6f2fd;
+  --nx-color-clinical-critical: #b34418;
+  --nx-color-clinical-critical-subtle: #fff3ee;
+  --nx-color-clinical-allergy: #8d3613;
+  --nx-color-clinical-allergy-subtle: #ffe0d3;
+  --nx-color-clinical-controlled: #422d69;
+  --nx-color-clinical-sensitive: #272c32;
+  --nx-color-clinical-break-glass: #6b290f;
+  --nx-color-platform-offline: #5c646d;
+  --nx-color-platform-sync-pending: #947420;
+  --nx-color-platform-support-session: #573b8b;
+}
+:root[data-theme="dark"] [data-tenant="freetown"] {
+  --nx-color-surface-page: #131619;
+  --nx-color-surface-raised: #272c32;
+  --nx-color-surface-sunken: #0b0d0f;
+  --nx-color-surface-overlay: #272c32;
+  --nx-color-surface-hover: #414850;
+  --nx-color-surface-selected: #0d332c;
+  --nx-color-surface-disabled: #272c32;
+  --nx-color-text-primary: #fafafa;
+  --nx-color-text-secondary: #d5d8dc;
+  --nx-color-text-muted: #adb3ba;
+  --nx-color-text-disabled: #5c646d;
+  --nx-color-text-on-action: #171b1f;
+  --nx-color-text-on-status: #131619;
+  --nx-color-text-link: #c4c9c8;
+  --nx-color-border-subtle: #272c32;
+  --nx-color-border-default: #414850;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #bcc2c1;
+  --nx-color-action-primary: #abb3b1;
+  --nx-color-action-primary-hover: #c4c9c8;
+  --nx-color-action-primary-active: #d8dbda;
+  --nx-color-action-primary-subtle: #0f362f;
+  --nx-color-action-secondary: #d5d8dc;
+  --nx-color-action-secondary-hover: #e8eaec;
+  --nx-color-action-secondary-subtle: #272c32;
+  --nx-color-status-success: #63d3b4;
+  --nx-color-status-success-subtle: #06332b;
+  --nx-color-status-warning: #eac961;
+  --nx-color-status-warning-subtle: #3a2d0e;
+  --nx-color-status-danger: #ee9494;
+  --nx-color-status-danger-subtle: #461818;
+  --nx-color-status-info: #bfa6ec;
+  --nx-color-status-info-subtle: #2c1e46;
+  --nx-color-clinical-critical: #fb9366;
+  --nx-color-clinical-critical-subtle: #471c0a;
+  --nx-color-clinical-allergy: #ffbc9f;
+  --nx-color-clinical-allergy-subtle: #471c0a;
+  --nx-color-clinical-controlled: #d8c8f5;
+  --nx-color-clinical-sensitive: #e8eaec;
+  --nx-color-clinical-break-glass: #ffbc9f;
+  --nx-color-platform-offline: #adb3ba;
+  --nx-color-platform-sync-pending: #eac961;
+  --nx-color-platform-support-session: #bfa6ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-tenant="freetown"] {
+  --nx-color-surface-page: #131619;
+  --nx-color-surface-raised: #272c32;
+  --nx-color-surface-sunken: #0b0d0f;
+  --nx-color-surface-overlay: #272c32;
+  --nx-color-surface-hover: #414850;
+  --nx-color-surface-selected: #0d332c;
+  --nx-color-surface-disabled: #272c32;
+  --nx-color-text-primary: #fafafa;
+  --nx-color-text-secondary: #d5d8dc;
+  --nx-color-text-muted: #adb3ba;
+  --nx-color-text-disabled: #5c646d;
+  --nx-color-text-on-action: #171b1f;
+  --nx-color-text-on-status: #131619;
+  --nx-color-text-link: #c4c9c8;
+  --nx-color-border-subtle: #272c32;
+  --nx-color-border-default: #414850;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #bcc2c1;
+  --nx-color-action-primary: #abb3b1;
+  --nx-color-action-primary-hover: #c4c9c8;
+  --nx-color-action-primary-active: #d8dbda;
+  --nx-color-action-primary-subtle: #0f362f;
+  --nx-color-action-secondary: #d5d8dc;
+  --nx-color-action-secondary-hover: #e8eaec;
+  --nx-color-action-secondary-subtle: #272c32;
+  --nx-color-status-success: #63d3b4;
+  --nx-color-status-success-subtle: #06332b;
+  --nx-color-status-warning: #eac961;
+  --nx-color-status-warning-subtle: #3a2d0e;
+  --nx-color-status-danger: #ee9494;
+  --nx-color-status-danger-subtle: #461818;
+  --nx-color-status-info: #bfa6ec;
+  --nx-color-status-info-subtle: #2c1e46;
+  --nx-color-clinical-critical: #fb9366;
+  --nx-color-clinical-critical-subtle: #471c0a;
+  --nx-color-clinical-allergy: #ffbc9f;
+  --nx-color-clinical-allergy-subtle: #471c0a;
+  --nx-color-clinical-controlled: #d8c8f5;
+  --nx-color-clinical-sensitive: #e8eaec;
+  --nx-color-clinical-break-glass: #ffbc9f;
+  --nx-color-platform-offline: #adb3ba;
+  --nx-color-platform-sync-pending: #eac961;
+  --nx-color-platform-support-session: #bfa6ec;
+  }
+}
+
+[data-tenant="salone"] {
+  --nx-color-surface-page: #fafafa;
+  --nx-color-surface-raised: #ffffff;
+  --nx-color-surface-sunken: #f4f5f6;
+  --nx-color-surface-overlay: #ffffff;
+  --nx-color-surface-hover: #f4f5f6;
+  --nx-color-surface-selected: #f6f7f8;
+  --nx-color-surface-disabled: #f4f5f6;
+  --nx-color-text-primary: #131619;
+  --nx-color-text-secondary: #414850;
+  --nx-color-text-muted: #5c646d;
+  --nx-color-text-disabled: #adb3ba;
+  --nx-color-text-on-action: #ffffff;
+  --nx-color-text-on-status: #ffffff;
+  --nx-color-text-link: #2c4b74;
+  --nx-color-border-subtle: #e8eaec;
+  --nx-color-border-default: #d5d8dc;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #2f4f7a;
+  --nx-color-action-primary: #2f4f7a;
+  --nx-color-action-primary-hover: #2c4a73;
+  --nx-color-action-primary-active: #28456b;
+  --nx-color-action-primary-subtle: #f4f4f6;
+  --nx-color-action-secondary: #414850;
+  --nx-color-action-secondary-hover: #272c32;
+  --nx-color-action-secondary-subtle: #f4f5f6;
+  --nx-color-status-success: #0f8169;
+  --nx-color-status-success-subtle: #ecfaf5;
+  --nx-color-status-warning: #947420;
+  --nx-color-status-warning-subtle: #fdf8ea;
+  --nx-color-status-danger: #ab3a3a;
+  --nx-color-status-danger-subtle: #fdf2f2;
+  --nx-color-status-info: #6d4bad;
+  --nx-color-status-info-subtle: #f6f2fd;
+  --nx-color-clinical-critical: #b34418;
+  --nx-color-clinical-critical-subtle: #fff3ee;
+  --nx-color-clinical-allergy: #8d3613;
+  --nx-color-clinical-allergy-subtle: #ffe0d3;
+  --nx-color-clinical-controlled: #422d69;
+  --nx-color-clinical-sensitive: #272c32;
+  --nx-color-clinical-break-glass: #6b290f;
+  --nx-color-platform-offline: #5c646d;
+  --nx-color-platform-sync-pending: #947420;
+  --nx-color-platform-support-session: #573b8b;
+}
+:root[data-theme="dark"] [data-tenant="salone"] {
+  --nx-color-surface-page: #131619;
+  --nx-color-surface-raised: #272c32;
+  --nx-color-surface-sunken: #0b0d0f;
+  --nx-color-surface-overlay: #272c32;
+  --nx-color-surface-hover: #414850;
+  --nx-color-surface-selected: #1c314f;
+  --nx-color-surface-disabled: #272c32;
+  --nx-color-text-primary: #fafafa;
+  --nx-color-text-secondary: #d5d8dc;
+  --nx-color-text-muted: #adb3ba;
+  --nx-color-text-disabled: #5c646d;
+  --nx-color-text-on-action: #171b1f;
+  --nx-color-text-on-status: #131619;
+  --nx-color-text-link: #c6c9d1;
+  --nx-color-border-subtle: #272c32;
+  --nx-color-border-default: #414850;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #bec2cb;
+  --nx-color-action-primary: #adb2be;
+  --nx-color-action-primary-hover: #c6c9d1;
+  --nx-color-action-primary-active: #d8dbe0;
+  --nx-color-action-primary-subtle: #1e3554;
+  --nx-color-action-secondary: #d5d8dc;
+  --nx-color-action-secondary-hover: #e8eaec;
+  --nx-color-action-secondary-subtle: #272c32;
+  --nx-color-status-success: #63d3b4;
+  --nx-color-status-success-subtle: #06332b;
+  --nx-color-status-warning: #eac961;
+  --nx-color-status-warning-subtle: #3a2d0e;
+  --nx-color-status-danger: #ee9494;
+  --nx-color-status-danger-subtle: #461818;
+  --nx-color-status-info: #bfa6ec;
+  --nx-color-status-info-subtle: #2c1e46;
+  --nx-color-clinical-critical: #fb9366;
+  --nx-color-clinical-critical-subtle: #471c0a;
+  --nx-color-clinical-allergy: #ffbc9f;
+  --nx-color-clinical-allergy-subtle: #471c0a;
+  --nx-color-clinical-controlled: #d8c8f5;
+  --nx-color-clinical-sensitive: #e8eaec;
+  --nx-color-clinical-break-glass: #ffbc9f;
+  --nx-color-platform-offline: #adb3ba;
+  --nx-color-platform-sync-pending: #eac961;
+  --nx-color-platform-support-session: #bfa6ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-tenant="salone"] {
+  --nx-color-surface-page: #131619;
+  --nx-color-surface-raised: #272c32;
+  --nx-color-surface-sunken: #0b0d0f;
+  --nx-color-surface-overlay: #272c32;
+  --nx-color-surface-hover: #414850;
+  --nx-color-surface-selected: #1c314f;
+  --nx-color-surface-disabled: #272c32;
+  --nx-color-text-primary: #fafafa;
+  --nx-color-text-secondary: #d5d8dc;
+  --nx-color-text-muted: #adb3ba;
+  --nx-color-text-disabled: #5c646d;
+  --nx-color-text-on-action: #171b1f;
+  --nx-color-text-on-status: #131619;
+  --nx-color-text-link: #c6c9d1;
+  --nx-color-border-subtle: #272c32;
+  --nx-color-border-default: #414850;
+  --nx-color-border-strong: #7c848d;
+  --nx-color-border-focus: #bec2cb;
+  --nx-color-action-primary: #adb2be;
+  --nx-color-action-primary-hover: #c6c9d1;
+  --nx-color-action-primary-active: #d8dbe0;
+  --nx-color-action-primary-subtle: #1e3554;
+  --nx-color-action-secondary: #d5d8dc;
+  --nx-color-action-secondary-hover: #e8eaec;
+  --nx-color-action-secondary-subtle: #272c32;
+  --nx-color-status-success: #63d3b4;
+  --nx-color-status-success-subtle: #06332b;
+  --nx-color-status-warning: #eac961;
+  --nx-color-status-warning-subtle: #3a2d0e;
+  --nx-color-status-danger: #ee9494;
+  --nx-color-status-danger-subtle: #461818;
+  --nx-color-status-info: #bfa6ec;
+  --nx-color-status-info-subtle: #2c1e46;
+  --nx-color-clinical-critical: #fb9366;
+  --nx-color-clinical-critical-subtle: #471c0a;
+  --nx-color-clinical-allergy: #ffbc9f;
+  --nx-color-clinical-allergy-subtle: #471c0a;
+  --nx-color-clinical-controlled: #d8c8f5;
+  --nx-color-clinical-sensitive: #e8eaec;
+  --nx-color-clinical-break-glass: #ffbc9f;
+  --nx-color-platform-offline: #adb3ba;
+  --nx-color-platform-sync-pending: #eac961;
+  --nx-color-platform-support-session: #bfa6ec;
+  }
+}
+
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--nx-color-text-primary);
+  background: var(--nx-color-surface-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+h1, h2, h3 { text-wrap: balance; margin: 0; letter-spacing: -0.011em; }
+h1 { font-size: 2.25rem; font-weight: 600; }
+h2 { font-size: 1.375rem; font-weight: 600; }
+h3 { font-size: 1rem; font-weight: 600; }
+p { margin: 0; }
+code { font-family: var(--font-mono); font-size: 0.86em; }
+a { color: var(--nx-color-text-link); text-underline-offset: 3px; }
+
+.muted { color: var(--nx-color-text-muted); font-size: 0.875rem; }
+
+.masthead { display: flex; flex-direction: column; gap: 0.75rem; }
+.eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 600;
+  color: var(--nx-color-text-muted);
+}
+.lede { max-width: 62ch; color: var(--nx-color-text-secondary); }
+
+.status-strip {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+section { display: flex; flex-direction: column; gap: 1.25rem; }
+.sec-head { display: flex; flex-direction: column; gap: 0.5rem; }
+.sec-head p { max-width: 64ch; color: var(--nx-color-text-secondary); font-size: 0.875rem; }
+
+.card {
+  background: var(--nx-color-surface-raised);
+  border: 1px solid var(--nx-color-border-subtle);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-xs);
+  padding: 1.5rem;
+}
+
+/* Ramps */
+.ramps { display: flex; flex-direction: column; gap: 1.25rem; }
+.ramp h3 { margin-bottom: 0.75rem; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 0.5rem; }
+.step { display: flex; flex-direction: column; gap: 4px; }
+.chip { height: 46px; border-radius: var(--r-md); border: 1px solid var(--nx-color-border-subtle); }
+.step-n { font-size: 0.75rem; font-weight: 500; }
+.step-v { font-size: 0.75rem; color: var(--nx-color-text-muted); font-family: var(--font-mono); }
+
+/* Semantic tokens */
+.tok-group { display: flex; flex-direction: column; gap: 0.75rem; }
+.tok-head { display: flex; flex-direction: column; gap: 2px; }
+.tok-head p { font-size: 0.875rem; color: var(--nx-color-text-muted); }
+.tok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0.5rem; }
+.tok {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--nx-color-border-subtle);
+  border-radius: var(--r-md);
+  background: var(--nx-color-surface-raised);
+}
+.tok-sw {
+  width: 22px; height: 22px; flex: none;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--nx-color-border-subtle);
+}
+
+/* Scales */
+.scale-block { display: flex; flex-direction: column; gap: 0.75rem; }
+.scale-block p { max-width: 66ch; }
+.scale-row { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.scale-item { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.scale-item span { font-size: 0.75rem; color: var(--nx-color-text-muted); }
+.radius-demo {
+  width: 76px; height: 76px;
+  background: var(--nx-color-action-primary-subtle);
+  border: 1px solid var(--nx-color-border-default);
+}
+.shadow-demo {
+  width: 76px; height: 76px;
+  border-radius: var(--r-lg);
+  background: var(--nx-color-surface-raised);
+  border: 1px solid var(--nx-color-border-subtle);
+}
+
+/* Controls */
+.btn {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 120ms cubic-bezier(0.2, 0, 0.13, 1);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--nx-color-border-focus);
+  outline-offset: 2px;
+}
+.btn-primary { background: var(--nx-color-action-primary); color: var(--nx-color-text-on-action); }
+.btn-primary:hover { background: var(--nx-color-action-primary-hover); }
+.btn-ghost {
+  background: transparent;
+  color: var(--nx-color-text-secondary);
+  border-color: var(--nx-color-border-default);
+}
+.btn-ghost:hover { background: var(--nx-color-surface-hover); }
+.btn-danger { background: var(--nx-color-status-danger); color: var(--nx-color-text-on-status); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 3px 0.75rem;
+  border-radius: var(--r-full);
+  white-space: nowrap;
+}
+.pill-ok { background: var(--nx-color-status-success-subtle); color: var(--nx-color-status-success); }
+.pill-warn { background: var(--nx-color-status-warning-subtle); color: var(--nx-color-status-warning); }
+.pill-danger { background: var(--nx-color-status-danger-subtle); color: var(--nx-color-status-danger); }
+.pill-info { background: var(--nx-color-status-info-subtle); color: var(--nx-color-status-info); }
+.pill-crit { background: var(--nx-color-clinical-critical-subtle); color: var(--nx-color-clinical-critical); }
+.pill-selected { background: var(--nx-color-surface-selected); color: var(--nx-color-text-link); }
+.pill-offline { background: var(--nx-color-surface-sunken); color: var(--nx-color-platform-offline); }
+
+.control-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+/* Applied sample */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; }
+.stat { display: flex; flex-direction: column; gap: 2px; }
+.stat-label { font-size: 0.75rem; color: var(--nx-color-text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.stat-value { font-size: 1.75rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.stat-delta { font-size: 0.75rem; color: var(--nx-color-text-muted); }
+
+.banner {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 1rem;
+  border-radius: var(--r-lg);
+  background: var(--nx-color-clinical-allergy-subtle);
+  border: 1px solid var(--nx-color-clinical-allergy);
+}
+.banner strong { color: var(--nx-color-clinical-allergy); }
+.banner p { font-size: 0.875rem; color: var(--nx-color-text-secondary); }
+.alert-dot {
+  width: 9px; height: 9px; border-radius: var(--r-full); flex: none;
+  background: var(--nx-color-clinical-allergy);
+  margin-top: 7px;
+}
+
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 620px; }
+th {
+  text-align: left; font-weight: 500;
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--nx-color-text-muted);
+  padding: 0 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--nx-color-border-default);
+}
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+  font-variant-numeric: tabular-nums;
+}
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover td { background: var(--nx-color-surface-hover); }
+td:first-child { font-family: var(--font-mono); font-size: 0.8125rem; }
+
+/* Tenancy */
+.tenants { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1rem; }
+.tenant {
+  display: flex; flex-direction: column; gap: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--nx-color-border-subtle);
+  background: var(--nx-color-surface-raised);
+  box-shadow: var(--sh-xs);
+}
+.tenant-head { display: flex; align-items: center; gap: 0.75rem; }
+.tenant-head > div { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.tenant-head strong { font-size: 0.875rem; }
+.tenant-head .muted { font-size: 0.75rem; font-family: var(--font-mono); }
+.tenant-swatch {
+  width: 30px; height: 30px; flex: none;
+  border-radius: var(--r-md);
+  border: 1px solid var(--nx-color-border-default);
+}
+.tenant-body { display: flex; gap: 0.5rem; }
+.tenant-foot { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; }
+.tenant-locked {
+  display: flex; align-items: flex-start; gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--nx-color-clinical-allergy);
+  background: var(--nx-color-clinical-allergy-subtle);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--r-md);
+}
+.rejected .reject-msg { font-size: 0.875rem; color: var(--nx-color-text-secondary); }
+.reject-meta { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
+.reject-meta > div { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.8125rem; }
+.reject-meta dt { color: var(--nx-color-text-muted); }
+.reject-meta dd { margin: 0; }
+
+footer {
+  font-size: 0.875rem;
+  color: var(--nx-color-text-muted);
+  border-top: 1px solid var(--nx-color-border-subtle);
+  padding-top: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="eyebrow">Nexuvi &middot; Design system</span>
+    <h1>Token specimen</h1>
+    <p class="lede">Every value on this page is read from the token modules at build time. Monochrome ground, colour rationed to the things that carry meaning. Generated 2026-08-13.</p>
+    <div class="status-strip">
+      <span class="pill pill-ok">43 semantic tokens</span>
+      <span class="pill pill-info">Light &amp; dark</span>
+      <span class="pill pill-warn">Logo &amp; typeface pending</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <h2>Foundations</h2>
+      <p>The neutral ramp is the brand. There is no Nexuvi hue in the action layer &mdash; &sect;3.3 gives every clinic its own brand colour, so a strong platform hue in that slot would either fight the tenant&rsquo;s branding or be overwritten by it.</p>
+    </div>
+    <div class="card ramps">
+      <div class="ramp"><h3>Neutral — the brand</h3><div class="steps">
+        <div class="step">
+          <div class="chip" style="background:#fafafa"></div>
+          <span class="step-n">50</span>
+          <span class="step-v">#fafafa</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#f4f5f6"></div>
+          <span class="step-n">100</span>
+          <span class="step-v">#f4f5f6</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#e8eaec"></div>
+          <span class="step-n">200</span>
+          <span class="step-v">#e8eaec</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#d5d8dc"></div>
+          <span class="step-n">300</span>
+          <span class="step-v">#d5d8dc</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#adb3ba"></div>
+          <span class="step-n">400</span>
+          <span class="step-v">#adb3ba</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#7c848d"></div>
+          <span class="step-n">500</span>
+          <span class="step-v">#7c848d</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#5c646d"></div>
+          <span class="step-n">600</span>
+          <span class="step-v">#5c646d</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#414850"></div>
+          <span class="step-n">700</span>
+          <span class="step-v">#414850</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#272c32"></div>
+          <span class="step-n">800</span>
+          <span class="step-v">#272c32</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#131619"></div>
+          <span class="step-n">900</span>
+          <span class="step-v">#131619</span>
+        </div></div></div>
+      <div class="ramp"><h3>Accent — selection, links, focus, info</h3><div class="steps">
+        <div class="step">
+          <div class="chip" style="background:#f6f2fd"></div>
+          <span class="step-n">50</span>
+          <span class="step-v">#f6f2fd</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#ebe3fa"></div>
+          <span class="step-n">100</span>
+          <span class="step-v">#ebe3fa</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#d8c8f5"></div>
+          <span class="step-n">200</span>
+          <span class="step-v">#d8c8f5</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#bfa6ec"></div>
+          <span class="step-n">300</span>
+          <span class="step-v">#bfa6ec</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#a382df"></div>
+          <span class="step-n">400</span>
+          <span class="step-v">#a382df</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#8763cb"></div>
+          <span class="step-n">500</span>
+          <span class="step-v">#8763cb</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#6d4bad"></div>
+          <span class="step-n">600</span>
+          <span class="step-v">#6d4bad</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#573b8b"></div>
+          <span class="step-n">700</span>
+          <span class="step-v">#573b8b</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#422d69"></div>
+          <span class="step-n">800</span>
+          <span class="step-v">#422d69</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#2c1e46"></div>
+          <span class="step-n">900</span>
+          <span class="step-v">#2c1e46</span>
+        </div></div></div>
+      <div class="ramp"><h3>Mint — success</h3><div class="steps">
+        <div class="step">
+          <div class="chip" style="background:#ecfaf5"></div>
+          <span class="step-n">50</span>
+          <span class="step-v">#ecfaf5</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#cdf2e6"></div>
+          <span class="step-n">100</span>
+          <span class="step-v">#cdf2e6</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#9ce5cf"></div>
+          <span class="step-n">200</span>
+          <span class="step-v">#9ce5cf</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#63d3b4"></div>
+          <span class="step-n">300</span>
+          <span class="step-v">#63d3b4</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#33bf9c"></div>
+          <span class="step-n">400</span>
+          <span class="step-v">#33bf9c</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#19a183"></div>
+          <span class="step-n">500</span>
+          <span class="step-v">#19a183</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#0f8169"></div>
+          <span class="step-n">600</span>
+          <span class="step-v">#0f8169</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#0c6553"></div>
+          <span class="step-n">700</span>
+          <span class="step-v">#0c6553</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#094d40"></div>
+          <span class="step-n">800</span>
+          <span class="step-v">#094d40</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#06332b"></div>
+          <span class="step-n">900</span>
+          <span class="step-v">#06332b</span>
+        </div></div></div>
+      <div class="ramp"><h3>Amber — warning</h3><div class="steps">
+        <div class="step">
+          <div class="chip" style="background:#fdf8ea"></div>
+          <span class="step-n">50</span>
+          <span class="step-v">#fdf8ea</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#faedc8"></div>
+          <span class="step-n">100</span>
+          <span class="step-v">#faedc8</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#f4dc96"></div>
+          <span class="step-n">200</span>
+          <span class="step-v">#f4dc96</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#eac961"></div>
+          <span class="step-n">300</span>
+          <span class="step-v">#eac961</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#d9b03c"></div>
+          <span class="step-n">400</span>
+          <span class="step-v">#d9b03c</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#b8922c"></div>
+          <span class="step-n">500</span>
+          <span class="step-v">#b8922c</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#947420"></div>
+          <span class="step-n">600</span>
+          <span class="step-v">#947420</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#745a1a"></div>
+          <span class="step-n">700</span>
+          <span class="step-v">#745a1a</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#574415"></div>
+          <span class="step-n">800</span>
+          <span class="step-v">#574415</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#3a2d0e"></div>
+          <span class="step-n">900</span>
+          <span class="step-v">#3a2d0e</span>
+        </div></div></div>
+      <div class="ramp"><h3>Rose — danger (generic UI)</h3><div class="steps">
+        <div class="step">
+          <div class="chip" style="background:#fdf2f2"></div>
+          <span class="step-n">50</span>
+          <span class="step-v">#fdf2f2</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#fbdfdf"></div>
+          <span class="step-n">100</span>
+          <span class="step-v">#fbdfdf</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#f6bdbd"></div>
+          <span class="step-n">200</span>
+          <span class="step-v">#f6bdbd</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#ee9494"></div>
+          <span class="step-n">300</span>
+          <span class="step-v">#ee9494</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#e06c6c"></div>
+          <span class="step-n">400</span>
+          <span class="step-v">#e06c6c</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#cc4e4e"></div>
+          <span class="step-n">500</span>
+          <span class="step-v">#cc4e4e</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#ab3a3a"></div>
+          <span class="step-n">600</span>
+          <span class="step-v">#ab3a3a</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#882d2d"></div>
+          <span class="step-n">700</span>
+          <span class="step-v">#882d2d</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#682323"></div>
+          <span class="step-n">800</span>
+          <span class="step-v">#682323</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#461818"></div>
+          <span class="step-n">900</span>
+          <span class="step-v">#461818</span>
+        </div></div></div>
+      <div class="ramp"><h3>Coral — clinical alert (locked)</h3><div class="steps">
+        <div class="step">
+          <div class="chip" style="background:#fff3ee"></div>
+          <span class="step-n">50</span>
+          <span class="step-v">#fff3ee</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#ffe0d3"></div>
+          <span class="step-n">100</span>
+          <span class="step-v">#ffe0d3</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#ffbc9f"></div>
+          <span class="step-n">200</span>
+          <span class="step-v">#ffbc9f</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#fb9366"></div>
+          <span class="step-n">300</span>
+          <span class="step-v">#fb9366</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#f07039"></div>
+          <span class="step-n">400</span>
+          <span class="step-v">#f07039</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#d85620"></div>
+          <span class="step-n">500</span>
+          <span class="step-v">#d85620</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#b34418"></div>
+          <span class="step-n">600</span>
+          <span class="step-v">#b34418</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#8d3613"></div>
+          <span class="step-n">700</span>
+          <span class="step-v">#8d3613</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#6b290f"></div>
+          <span class="step-n">800</span>
+          <span class="step-v">#6b290f</span>
+        </div>
+        <div class="step">
+          <div class="chip" style="background:#471c0a"></div>
+          <span class="step-n">900</span>
+          <span class="step-v">#471c0a</span>
+        </div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Semantic tokens</h2>
+      <p>Components reference only this layer. A component naming a primitive directly has hardcoded a decision that both tenant theming and dark mode need to be able to change.</p>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:1.5rem">
+      
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Surface</h3>
+          <p>Grounds, from page to overlay.</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-page)"></span>
+              <code>surfacePage</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-raised)"></span>
+              <code>surfaceRaised</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-sunken)"></span>
+              <code>surfaceSunken</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-overlay)"></span>
+              <code>surfaceOverlay</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-hover)"></span>
+              <code>surfaceHover</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-selected)"></span>
+              <code>surfaceSelected</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-surface-disabled)"></span>
+              <code>surfaceDisabled</code>
+            </div>
+        </div>
+      </div>
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Text</h3>
+          <p>Foregrounds. Every one clears AA on its intended ground.</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-primary)"></span>
+              <code>textPrimary</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-secondary)"></span>
+              <code>textSecondary</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-muted)"></span>
+              <code>textMuted</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-disabled)"></span>
+              <code>textDisabled</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-on-action)"></span>
+              <code>textOnAction</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-on-status)"></span>
+              <code>textOnStatus</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-text-link)"></span>
+              <code>textLink</code>
+            </div>
+        </div>
+      </div>
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Border</h3>
+          <p>Separation and focus.</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-border-subtle)"></span>
+              <code>borderSubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-border-default)"></span>
+              <code>borderDefault</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-border-strong)"></span>
+              <code>borderStrong</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-border-focus)"></span>
+              <code>borderFocus</code>
+            </div>
+        </div>
+      </div>
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Action</h3>
+          <p>Tenant-overridable. A clinic’s brand colour lands here.</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-primary)"></span>
+              <code>actionPrimary</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-primary-hover)"></span>
+              <code>actionPrimaryHover</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-primary-active)"></span>
+              <code>actionPrimaryActive</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-primary-subtle)"></span>
+              <code>actionPrimarySubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-secondary)"></span>
+              <code>actionSecondary</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-secondary-hover)"></span>
+              <code>actionSecondaryHover</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-action-secondary-subtle)"></span>
+              <code>actionSecondarySubtle</code>
+            </div>
+        </div>
+      </div>
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Status</h3>
+          <p>Generic interface state. Also tenant-overridable (§3.3).</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-success)"></span>
+              <code>statusSuccess</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-success-subtle)"></span>
+              <code>statusSuccessSubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-warning)"></span>
+              <code>statusWarning</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-warning-subtle)"></span>
+              <code>statusWarningSubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-danger)"></span>
+              <code>statusDanger</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-danger-subtle)"></span>
+              <code>statusDangerSubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-info)"></span>
+              <code>statusInfo</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-status-info-subtle)"></span>
+              <code>statusInfoSubtle</code>
+            </div>
+        </div>
+      </div>
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Clinical</h3>
+          <p>Locked platform-wide. No tenant configuration reaches these (§19.1).</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-critical)"></span>
+              <code>clinicalCritical</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-critical-subtle)"></span>
+              <code>clinicalCriticalSubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-allergy)"></span>
+              <code>clinicalAllergy</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-allergy-subtle)"></span>
+              <code>clinicalAllergySubtle</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-controlled)"></span>
+              <code>clinicalControlled</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-sensitive)"></span>
+              <code>clinicalSensitive</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-clinical-break-glass)"></span>
+              <code>clinicalBreakGlass</code>
+            </div>
+        </div>
+      </div>
+      <div class="tok-group">
+        <div class="tok-head">
+          <h3>Platform</h3>
+          <p>Locked. Offline and support-session state must read identically in every tenant.</p>
+        </div>
+        <div class="tok-grid">
+          
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-platform-offline)"></span>
+              <code>platformOffline</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-platform-sync-pending)"></span>
+              <code>platformSyncPending</code>
+            </div>
+            <div class="tok">
+              <span class="tok-sw" style="background:var(--nx-color-platform-support-session)"></span>
+              <code>platformSupportSession</code>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Shape and elevation</h2>
+      <p>This is most of where &ldquo;softer&rdquo; lives.</p>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;gap:2rem">
+      
+    <div class="scale-block">
+      <h3>Corner radius</h3>
+      <p class="muted">Cards sit at <code>lg</code>, controls at <code>md</code>, chips at <code>full</code>. <code>sm</code> exists for elements that tile edge-to-edge — table cells, calendar slots — where a large radius leaves visible gaps instead of a soft edge.</p>
+      <div class="scale-row">
+      <div class="scale-item">
+        <div class="radius-demo" style="border-radius:0.375rem"></div>
+        <code>sm</code><span>0.375rem</span>
+      </div>
+      <div class="scale-item">
+        <div class="radius-demo" style="border-radius:0.625rem"></div>
+        <code>md</code><span>0.625rem</span>
+      </div>
+      <div class="scale-item">
+        <div class="radius-demo" style="border-radius:1rem"></div>
+        <code>lg</code><span>1rem</span>
+      </div>
+      <div class="scale-item">
+        <div class="radius-demo" style="border-radius:1.25rem"></div>
+        <code>xl</code><span>1.25rem</span>
+      </div>
+      <div class="scale-item">
+        <div class="radius-demo" style="border-radius:1.75rem"></div>
+        <code>2xl</code><span>1.75rem</span>
+      </div>
+      <div class="scale-item">
+        <div class="radius-demo" style="border-radius:9999px"></div>
+        <code>full</code><span>9999px</span>
+      </div></div>
+    </div>
+    <div class="scale-block">
+      <h3>Elevation</h3>
+      <p class="muted">Wide and faint rather than tight and dark. A tight shadow reads as a hard edge.</p>
+      <div class="scale-row">
+      <div class="scale-item">
+        <div class="shadow-demo" style="box-shadow:0 1px 2px 0 rgb(19 22 25 / 0.04)"></div>
+        <code>xs</code>
+      </div>
+      <div class="scale-item">
+        <div class="shadow-demo" style="box-shadow:0 2px 6px -1px rgb(19 22 25 / 0.06), 0 1px 2px 0 rgb(19 22 25 / 0.04)"></div>
+        <code>sm</code>
+      </div>
+      <div class="scale-item">
+        <div class="shadow-demo" style="box-shadow:0 6px 16px -4px rgb(19 22 25 / 0.08), 0 2px 6px -2px rgb(19 22 25 / 0.05)"></div>
+        <code>md</code>
+      </div>
+      <div class="scale-item">
+        <div class="shadow-demo" style="box-shadow:0 16px 32px -8px rgb(19 22 25 / 0.10), 0 4px 10px -4px rgb(19 22 25 / 0.06)"></div>
+        <code>lg</code>
+      </div>
+      <div class="scale-item">
+        <div class="shadow-demo" style="box-shadow:0 24px 64px -12px rgb(19 22 25 / 0.18)"></div>
+        <code>overlay</code>
+      </div></div>
+    </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>In use</h2>
+      <p>A clinical worklist, assembled from the tokens above. Note how little colour is present until something needs attention.</p>
+    </div>
+
+    <div class="card" style="display:flex;flex-direction:column;gap:1.5rem">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">Awaiting acknowledgement</span>
+          <span class="stat-value">14</span>
+          <span class="stat-delta">3 added in the last hour</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Patients checked in</span>
+          <span class="stat-value">68</span>
+          <span class="stat-delta">Across 4 clinics</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Prescriptions to verify</span>
+          <span class="stat-value">23</span>
+          <span class="stat-delta">Median wait 11 min</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Queued for DHIS2</span>
+          <span class="stat-value">1,204</span>
+          <span class="stat-delta">Last submission 06:15</span>
+        </div>
+      </div>
+
+      <div class="banner">
+        <span class="alert-dot"></span>
+        <div>
+          <strong>Allergy — penicillin, anaphylaxis</strong>
+          <p>Recorded 12 Mar 2026 by Dr A. Kamara. This colour is locked platform-wide and cannot be changed by tenant branding.</p>
+        </div>
+      </div>
+
+      <div class="control-row">
+        <button class="btn btn-primary" type="button">Acknowledge result</button>
+        <button class="btn btn-ghost" type="button">Assign to colleague</button>
+        <button class="btn btn-danger" type="button">Cancel order</button>
+        <span class="pill pill-offline">&#9679; Working offline &mdash; 6 queued</span>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Order</th>
+              <th scope="col">Patient</th>
+              <th scope="col">Test</th>
+              <th scope="col">Waiting</th>
+              <th scope="col">State</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LAB-10847</td><td>Aminata Sesay</td><td>Serum potassium</td><td>2h 14m</td>
+              <td><span class="pill pill-crit">Critical &mdash; unacknowledged</span></td>
+            </tr>
+            <tr>
+              <td>LAB-10821</td><td>Mohamed Bangura</td><td>Malaria RDT</td><td>1h 02m</td>
+              <td><span class="pill pill-warn">Awaiting validation</span></td>
+            </tr>
+            <tr>
+              <td>LAB-10889</td><td>Fatmata Koroma</td><td>Full blood count</td><td>38m</td>
+              <td><span class="pill pill-info">In progress</span></td>
+            </tr>
+            <tr>
+              <td>LAB-10903</td><td>Ibrahim Turay</td><td>Blood glucose</td><td>12m</td>
+              <td><span class="pill pill-ok">Released</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="tenancy">
+    <div class="sec-head">
+      <h2>The same components, three tenants</h2>
+      <p>Each card below is identical markup under a different tenant theme. The clinic&rsquo;s colour reaches the action layer, links, selection, and focus &mdash; and stops there. The allergy strip is the same colour in all three, because it has to be.</p>
+    </div>
+    <div class="tenants">
+      
+      <div class="tenant" data-tenant="freetown">
+        <div class="tenant-head">
+          <span class="tenant-swatch" style="background:#1a5147"></span>
+          <div>
+            <strong>Freetown Family Clinic</strong>
+            <span class="muted">care.freetownfamily.sl</span>
+          </div>
+          <span class="pill pill-ok">Accepted</span>
+        </div>
+        <div class="tenant-body">
+          <button class="btn btn-primary" type="button">Book appointment</button>
+          <button class="btn btn-ghost" type="button">Cancel</button>
+        </div>
+        <div class="tenant-foot">
+          <span class="pill pill-selected">Selected</span>
+          <a href="#tenancy">A link in tenant colour</a>
+        </div>
+        <div class="tenant-locked">
+          <span class="alert-dot"></span>
+          Allergy: penicillin — locked colour, unchanged by tenant brand
+        </div>
+      </div>
+      <div class="tenant" data-tenant="salone">
+        <div class="tenant-head">
+          <span class="tenant-swatch" style="background:#2f4f7a"></span>
+          <div>
+            <strong>Salone Physio Group</strong>
+            <span class="muted">salonephysio.nexuvi.health</span>
+          </div>
+          <span class="pill pill-ok">Accepted</span>
+        </div>
+        <div class="tenant-body">
+          <button class="btn btn-primary" type="button">Book appointment</button>
+          <button class="btn btn-ghost" type="button">Cancel</button>
+        </div>
+        <div class="tenant-foot">
+          <span class="pill pill-selected">Selected</span>
+          <a href="#tenancy">A link in tenant colour</a>
+        </div>
+        <div class="tenant-locked">
+          <span class="alert-dot"></span>
+          Allergy: penicillin — locked colour, unchanged by tenant brand
+        </div>
+      </div>
+      <div class="tenant rejected">
+        <div class="tenant-head">
+          <span class="tenant-swatch" style="background:#f2cb85"></span>
+          <div>
+            <strong>Goldleaf Wellness</strong>
+            <span class="muted">goldleaf.nexuvi.health</span>
+          </div>
+          <span class="pill pill-danger">Rejected</span>
+        </div>
+        <p class="reject-msg">primary: #f2cb85 is too close to the page background to be distinguishable. The nearest shade that works is #a18656.</p>
+        <dl class="reject-meta">
+          <div><dt>Submitted</dt><dd><code>#f2cb85</code></dd></div>
+          <div><dt>Contrast</dt><dd>1.47:1 <span class="muted">need 3:1</span></dd></div>
+          <div><dt>Nearest that passes</dt><dd><code>#a18656</code></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Generated from <code>packages/design-system/src/tokens</code>. Outstanding before this system is complete: logo and favicon assets, confirmed and self-hosted typeface, component library, and the data-visualisation palette.</p>
+  </footer>
+</div>

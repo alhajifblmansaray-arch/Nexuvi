@@ -1,0 +1,33 @@
+node_modules/
+dist/
+build/
+.next/
+out/
+.turbo/
+coverage/
+
+# Secrets — never commit. Local dev values only ever live in .env.local (§2.1)
+.env
+.env.*
+!.env.example
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# Never allow real clinical data anywhere in the tree (§26.3)
+*.phi
+/tmp/
