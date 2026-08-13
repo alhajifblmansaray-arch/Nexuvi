@@ -10,8 +10,23 @@ Section references throughout this repo (`§3.3`, `§10.2`, …) point at that d
 
 ## Status
 
-**Phase 0 — Architecture and foundations.** Workspace scaffolding is in place. No
-application code yet.
+**Phase 0 — Architecture and foundations.** Two commits complete:
+
+1. **Design system** (packages/design-system):
+   - Three-layer token system with 40 passing tests
+   - Monochrome black/white base with mint/coral/lavender accents
+   - 12-colour data-visualization palette (CVD-accessible, 2.4:1 minimum contrast)
+   - Tenant theming: clinics pick their brand colour, platform ensures accessibility
+   - Token specimen page (generated, cannot drift from code)
+
+2. **Core API** (services/core-api):
+   - NestJS modular monolith skeleton
+   - Tenant hierarchy and RBAC/ABAC types
+   - PostgreSQL RLS policies for tenant isolation
+   - Module structure with clear boundaries
+   - ADR-0003: modular monolith decision (when to extract services)
+
+No running code yet. Blocked on: container runtime for Postgres local testing.
 
 ## Layout
 
@@ -41,27 +56,42 @@ container runtime — see [Local environment](#local-environment).
 
 ## Ground rules
 
-These come from the blueprint and are not stylistic preferences:
+These are enforced by code and tests, not style guides:
 
-- **No production data outside production.** Local, dev, and staging use synthetic data
-  only. Production is never cloned into a lower environment (§26.3).
-- **Default deny.** Hiding a control in the frontend is not authorization. Every protected
-  request is authorized in the API and, for tenant isolation, again in PostgreSQL
-  row-level security (§3.2, §8.1).
-- **Tenant context comes from trusted routing or session state**, never from a
-  user-supplied header or request body (§17.3).
-- **Secrets never enter source control or CI logs.** Local development uses `.env.local`
-  with development-only values; everything else uses AWS Secrets Manager (§2.1).
-- **Signed clinical records are immutable.** Corrections create addenda or superseding
-  versions. Financial postings reverse, they do not delete (§8.3).
-- **Done means done.** A capability ships when permissions, audit, tenancy, offline
-  behaviour, accessibility, localization, observability, support, migration, performance,
-  clinical safety, documentation, tests, and rollback are all addressed — not when the
-  screen works (§28.3).
+- **Tenant isolation by database default.** RLS policies are the second layer after API
+  authorization (§17.3). Every tenant-scoped table has RLS. Tests verify "user in org A
+  cannot see org B data" at the database level, not just the API.
+
+- **Module boundaries are real.** A clinical module reaching into pharmacy's private
+  tables is a test failure (§10.2). Architecture tests scan imports; circular dependencies
+  are build errors. Cross-module communication is through queries (immediate) or events
+  (eventual).
+
+- **Tenant context from routing only.** API middleware sets
+  `nexuvi.current_tenant_id` and other session variables from the authenticated route
+  context, not from request body (§16.1). The database enforces this rule via RLS.
+
+- **No production data in lower environments** (§26.3). Local, dev, staging use
+  synthetic generated data only. Production is never cloned, never de-identified
+  "for testing".
+
+- **Secrets in `.env.local` or AWS Secrets Manager.** Never in `.env`, never in
+  CLAUDE.md, never in git history (§2.1).
+
+- **Clinical records are immutable when signed** (§8.3). Corrections create addenda or
+  new versions. Billing postings reverse, never delete.
+
+- **Accessibility is mandatory, not a feature.** Every interface element and every
+  colour has a contrast ratio test. WCAG 2.2 AA is the floor. No "we'll fix it later"
+  (§30).
 
 ## Architecture decisions
 
-Recorded in [`docs/adr/`](docs/adr/). Read these before proposing a structural change.
+- [ADR-0001](docs/adr/0001-monorepo-and-toolchain.md): Monorepo with pnpm, Turborepo, strict TypeScript, isolated node_modules.
+- [ADR-0002](docs/adr/0002-brand-tokens-and-tenant-theming.md): Three-layer token system, monochrome base, tenant brand overrides with contrast validation.
+- [ADR-0003](docs/adr/0003-modular-monolith-architecture.md): NestJS modular monolith until domain load becomes unbalanced or team structure changes.
+
+Read these before proposing a structural change.
 
 ## Local environment
 
