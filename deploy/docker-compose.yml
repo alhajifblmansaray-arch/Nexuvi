@@ -7,8 +7,16 @@ services:
       - -c
       - |
         apk add --no-cache git &&
-        if [ -d .git ]; then git fetch --all && git reset --hard origin/main; \
-        else git clone https://github.com/alhajifblmansaray-arch/Nexuvi.git . ; fi &&
+        # Not `git clone`: the trial-data volume mounts inside /app, so the directory
+        # already exists and is non-empty before this runs, and clone refuses that.
+        # init + fetch + checkout is the form that works into an occupied directory,
+        # and it doubles as the update path on every restart.
+        if [ ! -d .git ]; then
+          git init -q . &&
+          git remote add origin https://github.com/alhajifblmansaray-arch/Nexuvi.git;
+        fi &&
+        git fetch --depth 1 origin main &&
+        git checkout -f -B main FETCH_HEAD &&
         npm install -g pnpm &&
         pnpm install &&
         pnpm build &&
