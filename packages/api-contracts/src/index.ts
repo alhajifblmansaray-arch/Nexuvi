@@ -17,6 +17,7 @@ export type {
   ProvisionTenantRequest,
   ProvisionTenantResult,
   SlugAvailability,
+  TenantSummary,
   TenantTemplate,
   TenantTemplateKey,
 } from './provisioning.ts';

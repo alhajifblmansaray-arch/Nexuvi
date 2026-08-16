@@ -7,6 +7,7 @@ import type {
   FacilitySummary,
   OperationsDashboard,
   Paginated,
+  TenantSummary,
 } from '@nexuvi/api-contracts';
 
 import { clinicHost, getAccessToken } from './session';
@@ -196,4 +197,9 @@ export function assignEncounter(
     method: 'POST',
     body: { clinicianId, ...(reason?.trim() ? { reason: reason.trim() } : {}) },
   });
+}
+
+/** Every clinic on the platform. Platform-operator only; the API enforces that. */
+export function listClinics(): Promise<readonly TenantSummary[]> {
+  return request<readonly TenantSummary[]>('/platform/tenants');
 }

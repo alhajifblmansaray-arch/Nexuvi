@@ -122,3 +122,26 @@ export interface SlugAvailability {
   readonly reason?: string;
   readonly suggestion?: string;
 }
+
+/**
+ * A clinic as the operator console lists it.
+ *
+ * Carries the two addresses rather than leaving the console to assemble them. The rule for
+ * turning a slug into a hostname is the platform's, and a second copy of it in the
+ * front-end is a copy that will eventually disagree — as it did when staff moved from
+ * `{slug}.app` to `{slug}-app`.
+ */
+export interface TenantSummary {
+  readonly tenantId: string;
+  readonly slug: string;
+  readonly legalName: string;
+  readonly countryCellId: string;
+  readonly plan?: PlanKey;
+  readonly template?: TenantTemplateKey;
+  readonly status: 'active' | 'suspended';
+  readonly createdAt?: IsoTimestamp;
+  /** Where patients go. Absent when the clinic's plan does not include the portal. */
+  readonly portalUrl?: string;
+  /** Where staff sign in. */
+  readonly staffUrl: string;
+}

@@ -3,6 +3,7 @@ import type {
   PlanDefinition,
   ProvisionTenantResult,
   SlugAvailability,
+  TenantSummary,
   TenantTemplate,
 } from '@nexuvi/api-contracts';
 
@@ -51,6 +52,18 @@ export class ProvisioningController {
   @Get('country-cells')
   countryCells() {
     return COUNTRY_CELLS;
+  }
+
+  /**
+   * Every clinic on the platform.
+   *
+   * Read-only and deliberately thin: names, addresses and status. A platform operator can
+   * see that a customer exists; nothing here reaches inside one.
+   */
+  @RequirePermission(PERMISSIONS.PLATFORM_TENANT_READ)
+  @Get('tenants')
+  tenants(): readonly TenantSummary[] {
+    return this.provisioning.listTenants();
   }
 
   /** Check a slug before committing to it — it ends up in patients' bookmarks. */

@@ -15,6 +15,18 @@ import { SESSION_COOKIE } from './lib/session-cookie';
  * verifying the signature, which is the API's job and not something the edge should
  * duplicate) purely to decide between "show the app" and "show the login".
  */
+/** The platform's own hostnames — the ones that are not any clinic. */
+const PLATFORM_DOMAIN = process.env.PLATFORM_DOMAIN ?? 'nexuvi.health';
+
+function isPlatformHost(request: NextRequest): boolean {
+  const host = (request.headers.get('host') ?? '').split(':')[0]?.toLowerCase() ?? '';
+  return (
+    host === PLATFORM_DOMAIN ||
+    host === `www.${PLATFORM_DOMAIN}` ||
+    host === `app.${PLATFORM_DOMAIN}`
+  );
+}
+
 export function middleware(request: NextRequest) {
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const hasSession = token ? !isExpired(token) : false;
@@ -24,8 +36,20 @@ export function middleware(request: NextRequest) {
   // First-run setup carries its own credential — the invitation token — so it must be
   // reachable before any session exists.
   const isSetup = pathname.startsWith('/setup');
+  // The operator console. Not a clinic surface: it runs its own gate, so it must be
+  // reachable without a clinic session.
+  const isPlatform = pathname.startsWith('/platform');
 
-  if (!hasSession && !isSignIn && !isSetup) {
+  // The platform's own address has no clinic behind it, so a clinic sign-in form there
+  // would ask someone to log in to nothing. Send it to the console instead.
+  if (isPlatformHost(request) && !isPlatform) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/platform';
+    url.search = '';
+    return NextResponse.redirect(url);
+  }
+
+  if (!hasSession && !isSignIn && !isSetup && !isPlatform) {
     const url = request.nextUrl.clone();
     url.pathname = '/sign-in';
     url.searchParams.set('next', pathname + request.nextUrl.search);

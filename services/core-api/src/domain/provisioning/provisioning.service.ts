@@ -5,6 +5,7 @@ import type {
   ProvisionTenantRequest,
   ProvisionTenantResult,
   SlugAvailability,
+  TenantSummary,
 } from '@nexuvi/api-contracts';
 
 import { PLANS, TEMPLATES, resolveModules } from './templates';
@@ -12,6 +13,7 @@ import { AuditService } from '../audit/audit.service';
 import { ConfigService } from '../../infrastructure/config/config.service';
 import { InviteService } from '../identity/invite.service';
 import {
+  TENANTS,
   findCountryCell,
   findTenantBySlug,
   registerTenant,
@@ -60,6 +62,48 @@ export class ProvisioningService {
   /** The domain clinic subdomains hang off. */
   private get domain(): string {
     return this.config.config.platformDomain;
+  }
+
+  /** Where a clinic's patients go. */
+  portalUrlFor(slug: string): string {
+    return `https://${slug}.${this.domain}`;
+  }
+
+  /**
+   * Where a clinic's staff sign in.
+   *
+   * One definition, because this rule already changed once — staff moved from
+   * `{slug}.app` to `{slug}-app` so a wildcard certificate could cover it — and a second
+   * copy anywhere is the one that will be missed next time.
+   */
+  staffUrlFor(slug: string): string {
+    return `https://${slug}-app.${this.domain}`;
+  }
+
+  /**
+   * Every clinic on the platform, for the operator console.
+   *
+   * Registry order, which is provisioning order. No clinical data crosses this boundary —
+   * a platform operator can see that a customer exists, never what is inside it.
+   */
+  listTenants(): readonly TenantSummary[] {
+    return TENANTS.map((t) => ({
+      tenantId: t.id,
+      slug: t.slug,
+      legalName: t.legalName,
+      countryCellId: t.countryCellId,
+      status: t.status ?? 'active',
+      staffUrl: this.staffUrlFor(t.slug),
+      // The portal is a plan entitlement. Listing an address for a clinic that has not
+      // bought one sends the operator to a surface their customer does not have.
+      ...(t.modules?.includes('portal') === false ? {} : { portalUrl: this.portalUrlFor(t.slug) }),
+      // Spread rather than assigned: the seeded fixture tenants predate plans and
+      // templates, and `exactOptionalPropertyTypes` distinguishes an absent field from one
+      // present and undefined. Absent is the honest answer.
+      ...(t.plan ? { plan: t.plan as NonNullable<TenantSummary['plan']> } : {}),
+      ...(t.template ? { template: t.template as NonNullable<TenantSummary['template']> } : {}),
+      ...(t.createdAt ? { createdAt: t.createdAt } : {}),
+    }));
   }
 
   checkSlug(slug: string): SlugAvailability {
@@ -189,12 +233,12 @@ export class ProvisioningService {
       tenantId: tenant.id,
       slug,
       facilityId,
-      portalUrl: portalIncluded ? `https://${slug}.${this.domain}` : '',
+      portalUrl: portalIncluded ? this.portalUrlFor(slug) : '',
       // Carries the invitation token. It is shown to the operator once, for delivery —
       // nothing stores the plaintext, so it cannot be retrieved later.
       // The staff subdomain, not the patient portal. Administration and patient-facing
       // surfaces are deliberately different origins.
-      setupUrl: `https://${slug}-app.${this.domain}/setup?invite=${invitation.token}`,
+      setupUrl: `${this.staffUrlFor(slug)}/setup?invite=${invitation.token}`,
       inviteExpiresAt: invitation.expiresAt,
       plan: plan.key,
       template: template.key,
