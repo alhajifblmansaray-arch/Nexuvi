@@ -1,0 +1,24 @@
+# Cloudflare Tunnel — copy to ~/.cloudflared/config.yml and replace example.com and <UUID>.
+#
+# Routing note: the FIRST matching rule wins, so the more specific staff hostname must come
+# before the patient wildcard. Reversed, `*.example.com` swallows `*.app.example.com` and
+# every staff request lands on the patient portal.
+
+tunnel: <UUID>
+credentials-file: /Users/YOU/.cloudflared/<UUID>.json
+
+ingress:
+  # Staff — {clinic}.app.example.com → clinical workspace
+  - hostname: "*.app.example.com"
+    service: http://localhost:3000
+    originRequest:
+      # The tunnel terminates TLS at Cloudflare's edge and forwards the original hostname
+      # as X-Forwarded-Host, which is exactly what the host resolver reads.
+      httpHostHeader: ""
+
+  # Patients — {clinic}.example.com → patient portal
+  - hostname: "*.example.com"
+    service: http://localhost:3002
+
+  # Anything else is not a clinic.
+  - service: http_status:404

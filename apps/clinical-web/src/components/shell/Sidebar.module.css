@@ -1,0 +1,230 @@
+.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 15rem;
+  height: 100dvh;
+  position: sticky;
+  top: 0;
+  padding: var(--space-5) var(--space-3);
+  background: var(--nx-color-surface-raised);
+  border-right: 1px solid var(--nx-color-border-subtle);
+  overflow-y: auto;
+}
+
+/* Brand ---------------------------------------------------------------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-2);
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-md);
+  background: var(--nx-color-action-primary);
+  color: var(--nx-color-text-on-action);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brandName {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+.brandOrg {
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sections ------------------------------------------------------------- */
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  flex: 1;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sectionTitle {
+  padding: 0 var(--space-2);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nx-color-text-muted);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  list-style: none;
+}
+
+.link,
+.pending {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 0.4375rem var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+.link {
+  color: var(--nx-color-text-secondary);
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.link:hover {
+  background: var(--nx-color-surface-hover);
+  color: var(--nx-color-text-primary);
+}
+
+.linkActive,
+.linkActive:hover {
+  background: var(--nx-color-surface-selected);
+  color: var(--nx-color-text-primary);
+  font-weight: 550;
+}
+
+/* Specified but unbuilt: legible enough to read as a roadmap, quiet enough
+   that it never competes with a route the user can actually take. */
+.pending {
+  color: var(--nx-color-text-disabled);
+  cursor: default;
+}
+
+.pendingTag {
+  flex-shrink: 0;
+  padding: 0.0625rem 0.3125rem;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-surface-sunken);
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* User ----------------------------------------------------------------- */
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-2) 0;
+  border-top: 1px solid var(--nx-color-border-subtle);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-surface-sunken);
+  border: 1px solid var(--nx-color-border-subtle);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  color: var(--nx-color-text-secondary);
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.userName {
+  font-size: 0.8125rem;
+  font-weight: 550;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userRole {
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+}
+
+.signOut {
+  padding: 0.1875rem 0.4375rem;
+  border-radius: var(--radius-md);
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+}
+
+.signOut:hover {
+  background: var(--nx-color-surface-hover);
+  color: var(--nx-color-text-primary);
+}
+
+/* On narrow viewports the sidebar becomes a horizontally scrolling strip above
+   the content rather than a drawer — one tap fewer, and ward tablets are the
+   most common device in this width band. */
+@media (max-width: 60rem) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+    border-right: none;
+    border-bottom: 1px solid var(--nx-color-border-subtle);
+    overflow-x: auto;
+  }
+
+  .sections {
+    flex-direction: row;
+    gap: var(--space-4);
+    flex: 0 0 auto;
+  }
+
+  .sectionTitle,
+  .pending,
+  .user {
+    display: none;
+  }
+
+  .list {
+    flex-direction: row;
+    gap: var(--space-1);
+  }
+
+  .link {
+    white-space: nowrap;
+  }
+}

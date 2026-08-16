@@ -4,8 +4,23 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "types": ["node"],
+
+    // NestJS DI and TypeORM both read parameter and property types from decorator
+    // metadata at runtime. Without `emitDecoratorMetadata` constructor injection resolves
+    // to `undefined` and every column type has to be declared by hand.
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+
+    // TypeORM entities are hydrated from result rows, never constructed, so their columns
+    // are legitimately unassigned at construction time. This relaxation is scoped to this
+    // package; `strict` remains on for everything else, including null checks.
+    "strictPropertyInitialization": false,
+
+    // The workspace packages are consumed as TypeScript source and their internal imports
+    // carry explicit `.ts` extensions (correct for Node ESM). Permitted here because this
+    // config only ever type-checks — SWC does the emitting, so no `.ts` specifier reaches
+    // a build output.
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

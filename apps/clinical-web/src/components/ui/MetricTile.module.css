@@ -1,0 +1,76 @@
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+  padding: var(--space-4);
+  background: var(--nx-color-surface-raised);
+  border: 1px solid var(--nx-color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* Severity reads as a stripe on the leading edge, never as a recoloured figure —
+   the numbers have to stay comparable across the strip. */
+.tile[data-emphasised='true']::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--stripe);
+}
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--nx-color-text-muted);
+}
+
+.value {
+  font-size: 1.875rem;
+  font-weight: 620;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: 0.125rem;
+}
+
+.caption {
+  font-size: 0.75rem;
+  color: var(--nx-color-text-muted);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1875rem;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.trend[data-sentiment='positive'] {
+  color: var(--nx-color-status-success);
+}
+
+.trend[data-sentiment='negative'] {
+  color: var(--nx-color-status-danger);
+}
+
+.trend[data-sentiment='neutral'] {
+  color: var(--nx-color-text-muted);
+}

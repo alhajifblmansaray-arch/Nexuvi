@@ -1,0 +1,101 @@
+.scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.table thead th {
+  padding: var(--space-2) var(--space-4);
+  text-align: left;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--nx-color-text-muted);
+  background: var(--nx-color-surface-sunken);
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+}
+
+.table tbody td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: var(--nx-color-surface-hover);
+}
+
+/* Closed work stays visible but recedes — it is context, not the job. */
+.table tbody tr[data-terminal='true'] {
+  opacity: 0.6;
+}
+
+.reference {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.reason {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+  max-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.patient {
+  display: block;
+  font-weight: 550;
+}
+
+.patientId {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+}
+
+.muted {
+  color: var(--nx-color-text-secondary);
+}
+
+.unassigned {
+  color: var(--nx-color-text-disabled);
+  font-style: italic;
+}
+
+.waiting {
+  font-weight: 620;
+}
+
+.waiting[data-overdue='true'] {
+  color: var(--nx-color-status-danger);
+}
+
+.empty {
+  padding: var(--space-6);
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+}
+
+/* The reference is the row's link target. Underline on hover only — a table of
+   permanently underlined ids is noisier than it is helpful. */
+a.reference:hover {
+  color: var(--nx-color-text-link);
+  text-decoration: underline;
+}

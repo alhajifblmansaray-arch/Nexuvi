@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexuvi Clinical Workspace — Design System Demo</title>
+  <style>
+    :root {
+      --nx-color-surface-page: #fafafa;
+      --nx-color-surface-raised: #ffffff;
+      --nx-color-surface-sunken: #f4f5f6;
+      --nx-color-surface-hover: #f4f5f6;
+      --nx-color-text-primary: #131619;
+      --nx-color-text-secondary: #414850;
+      --nx-color-text-muted: #5c646d;
+      --nx-color-border-subtle: #e8eaec;
+      --nx-color-border-default: #d5d8dc;
+      --nx-color-action-primary: #131619;
+      --nx-color-action-primary-hover: #272c32;
+      --nx-color-status-success: #19a183;
+      --nx-color-status-warning: #ab7510;
+      --nx-color-status-danger: #c23b3b;
+      --nx-color-clinical-critical: #d85620;
+      --nx-color-clinical-allergy: #c74a11;
+      --nx-color-text-on-status: #ffffff;
+      --font-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --radius-md: 0.625rem;
+      --radius-lg: 1rem;
+      --shadow-sm: 0 2px 6px -1px rgba(19, 22, 25, 0.06), 0 1px 2px rgba(19, 22, 25, 0.04);
+      --shadow-md: 0 6px 16px -4px rgba(19, 22, 25, 0.08), 0 2px 6px -2px rgba(19, 22, 25, 0.05);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --nx-color-surface-page: #131619;
+        --nx-color-surface-raised: #272c32;
+        --nx-color-surface-sunken: #0b0d0f;
+        --nx-color-surface-hover: #414850;
+        --nx-color-text-primary: #fafafa;
+        --nx-color-text-secondary: #d5d8dc;
+        --nx-color-text-muted: #adb3ba;
+        --nx-color-border-subtle: #414850;
+        --nx-color-border-default: #5c646d;
+        --nx-color-action-primary: #fafafa;
+        --nx-color-action-primary-hover: #ffffff;
+        --nx-color-status-success: #71c2a8;
+        --nx-color-status-warning: #f4dc96;
+        --nx-color-status-danger: #ee9494;
+        --nx-color-clinical-critical: #fb9366;
+        --nx-color-clinical-allergy: #ffbc9f;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--nx-color-text-primary);
+      background: var(--nx-color-surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--nx-color-surface-raised);
+      border-bottom: 1px solid var(--nx-color-border-subtle);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.011em;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .user-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+    }
+
+    .user-email {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .user-role {
+      font-size: 0.75rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .status-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--nx-color-surface-raised);
+      border: 1px solid var(--nx-color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: 600;
+      margin: 0.5rem 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-delta {
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-muted);
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.011em;
+    }
+
+    .table {
+      background: var(--nx-color-surface-raised);
+      border: 1px solid var(--nx-color-border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .table-head {
+      background: var(--nx-color-surface-sunken);
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1.5fr 2fr;
+      gap: 1rem;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--nx-color-border-default);
+    }
+
+    .table-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1.5fr 2fr;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--nx-color-border-subtle);
+      align-items: center;
+    }
+
+    .table-row:hover {
+      background: var(--nx-color-surface-hover);
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .patient-name {
+      font-weight: 500;
+      color: var(--nx-color-text-primary);
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-success {
+      background: var(--nx-color-status-success);
+      color: white;
+    }
+
+    .badge-warning {
+      background: var(--nx-color-status-warning);
+      color: white;
+    }
+
+    .badge-critical {
+      background: var(--nx-color-clinical-critical);
+      color: white;
+    }
+
+    .alert {
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    .alert-allergy {
+      color: var(--nx-color-clinical-allergy);
+    }
+
+    .alert-critical {
+      color: var(--nx-color-clinical-critical);
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .palette-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .swatch {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--nx-color-border-subtle);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .palette-item span {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 120ms cubic-bezier(0.2, 0, 0.13, 1);
+      border: 1px solid transparent;
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary {
+      background: var(--nx-color-action-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--nx-color-action-primary-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--nx-color-text-secondary);
+      border-color: var(--nx-color-border-default);
+    }
+
+    .btn-secondary:hover {
+      background: var(--nx-color-surface-hover);
+    }
+
+    .btn-danger {
+      background: var(--nx-color-status-danger);
+      color: white;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--nx-color-text-secondary);
+    }
+
+    .btn-ghost:hover {
+      background: var(--nx-color-surface-hover);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <div>
+          <h1>Freetown Family Clinic</h1>
+          <p class="subtitle">Clinical Workspace</p>
+        </div>
+        <div class="user-card">
+          <span class="user-email">Dr. Aminata Sesay</span>
+          <span class="user-role">Physician</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="status-cards">
+        <div class="stat-card">
+          <div class="stat-label">Awaiting acknowledgement</div>
+          <div class="stat-value">7</div>
+          <div class="stat-delta">2 critical results</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Patients checked in</div>
+          <div class="stat-value">24</div>
+          <div class="stat-delta">Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Prescriptions to verify</div>
+          <div class="stat-value">12</div>
+          <div class="stat-delta">Median wait: 8 min</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Referrals pending</div>
+          <div class="stat-value">3</div>
+          <div class="stat-delta">Awaiting response</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Patients Checked In</h2>
+        <div class="table">
+          <div class="table-head">
+            <div>Patient</div>
+            <div>ID</div>
+            <div>Age</div>
+            <div>Status</div>
+            <div>Alerts</div>
+          </div>
+          <div class="table-body">
+            <div class="table-row">
+              <div><span class="patient-name">Fatmata Koroma</span></div>
+              <div><span class="mono">PAT-00142</span></div>
+              <div>34</div>
+              <div><span class="badge badge-warning">Waiting</span></div>
+              <div><span class="alert alert-allergy">⚠ Penicillin allergy</span></div>
+            </div>
+            <div class="table-row">
+              <div><span class="patient-name">Ibrahim Turay</span></div>
+              <div><span class="mono">PAT-00156</span></div>
+              <div>67</div>
+              <div><span class="badge badge-success">In room</span></div>
+              <div>—</div>
+            </div>
+            <div class="table-row">
+              <div><span class="patient-name">Mohamed Bangura</span></div>
+              <div><span class="mono">PAT-00163</span></div>
+              <div>45</div>
+              <div><span class="badge badge-critical">Unack. result</span></div>
+              <div><span class="alert alert-critical">🔴 Critical</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Colour Palette — Rationed, Meaningful</h2>
+        <div class="palette-grid">
+          <div class="palette-item">
+            <div class="swatch" style="background: #19a183;"></div>
+            <span>Success (Mint)</span>
+          </div>
+          <div class="palette-item">
+            <div class="swatch" style="background: #d85620;"></div>
+            <span>Critical (Coral)</span>
+          </div>
+          <div class="palette-item">
+            <div class="swatch" style="background: #8763cb;"></div>
+            <span>Analytical (Purple)</span>
+          </div>
+          <div class="palette-item">
+            <div class="swatch" style="background: #131619;"></div>
+            <span>Primary Action</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Controls</h2>
+        <div class="button-group">
+          <button class="btn-primary">Acknowledge result</button>
+          <button class="btn-secondary">Assign to colleague</button>
+          <button class="btn-danger">Cancel order</button>
+          <button class="btn-ghost">View details</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

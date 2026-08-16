@@ -1,0 +1,74 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--nx-color-border-subtle);
+  background: var(--nx-color-surface-raised);
+  color: var(--nx-color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 550;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.chip:hover {
+  background: var(--nx-color-surface-hover);
+  color: var(--nx-color-text-primary);
+}
+
+.chipActive,
+.chipActive:hover {
+  background: var(--nx-color-action-primary);
+  border-color: var(--nx-color-action-primary);
+  color: var(--nx-color-text-on-action);
+}
+
+.dateNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.step {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--nx-color-border-subtle);
+  background: var(--nx-color-surface-raised);
+  color: var(--nx-color-text-secondary);
+  font-size: 0.8125rem;
+}
+
+.step:hover {
+  background: var(--nx-color-surface-hover);
+  color: var(--nx-color-text-primary);
+}
+
+.date {
+  min-width: 11rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.today {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-md);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--nx-color-text-link);
+}
+
+.today:hover {
+  background: var(--nx-color-surface-hover);
+}

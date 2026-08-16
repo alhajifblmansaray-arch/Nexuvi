@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexuvi Operations Dashboard</title>
+  <style>
+    :root {
+      --nx-color-surface-page: #fafafa;
+      --nx-color-surface-raised: #ffffff;
+      --nx-color-surface-sunken: #f4f5f6;
+      --nx-color-surface-hover: #f4f5f6;
+      --nx-color-text-primary: #131619;
+      --nx-color-text-secondary: #414850;
+      --nx-color-text-muted: #5c646d;
+      --nx-color-border-subtle: #e8eaec;
+      --nx-color-border-default: #d5d8dc;
+      --nx-color-action-primary: #131619;
+      --nx-color-action-primary-hover: #272c32;
+      --nx-color-status-success: #19a183;
+      --nx-color-status-warning: #ab7510;
+      --nx-color-status-danger: #c23b3b;
+      --nx-color-clinical-critical: #d85620;
+      --font-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --radius-md: 0.625rem;
+      --radius-lg: 1rem;
+      --shadow-sm: 0 2px 6px -1px rgba(19, 22, 25, 0.06), 0 1px 2px rgba(19, 22, 25, 0.04);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --nx-color-surface-page: #131619;
+        --nx-color-surface-raised: #272c32;
+        --nx-color-surface-sunken: #0b0d0f;
+        --nx-color-surface-hover: #414850;
+        --nx-color-text-primary: #fafafa;
+        --nx-color-text-secondary: #d5d8dc;
+        --nx-color-text-muted: #adb3ba;
+        --nx-color-border-subtle: #414850;
+        --nx-color-border-default: #5c646d;
+        --nx-color-action-primary: #fafafa;
+        --nx-color-action-primary-hover: #ffffff;
+        --nx-color-status-success: #71c2a8;
+        --nx-color-status-warning: #f4dc96;
+        --nx-color-status-danger: #ee9494;
+        --nx-color-clinical-critical: #fb9366;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--nx-color-text-primary);
+      background: var(--nx-color-surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--nx-color-surface-raised);
+      border-bottom: 1px solid var(--nx-color-border-subtle);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.011em;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .user-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.25rem;
+    }
+
+    .user-email {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .user-role {
+      font-size: 0.75rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .status-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--nx-color-surface-raised);
+      border: 1px solid var(--nx-color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 2.25rem;
+      font-weight: 600;
+      margin: 0.5rem 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-delta {
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-muted);
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.011em;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .chart-card {
+      background: var(--nx-color-surface-raised);
+      border: 1px solid var(--nx-color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin: 0 0 1rem 0;
+      color: var(--nx-color-text-primary);
+      letter-spacing: -0.011em;
+    }
+
+    .chart {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 60px;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .bar-label {
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-secondary);
+      font-weight: 500;
+    }
+
+    .bar-container {
+      height: 24px;
+      background: var(--nx-color-surface-sunken);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+    }
+
+    .bar-value {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--nx-color-text-primary);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stacked-bar {
+      display: flex;
+      height: 40px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1rem;
+    }
+
+    .stack-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .stacked-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .stacked-legend > div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-secondary);
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .trend-chart {
+      width: 100%;
+      height: 160px;
+      margin-bottom: 1rem;
+    }
+
+    .trend-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .trend-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-secondary);
+    }
+
+    .trend-legend > div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .table {
+      background: var(--nx-color-surface-raised);
+      border: 1px solid var(--nx-color-border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .table-head {
+      background: var(--nx-color-surface-sunken);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1.5fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: var(--nx-color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--nx-color-border-default);
+    }
+
+    .table-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1.5fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--nx-color-border-subtle);
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .table-row:hover {
+      background: var(--nx-color-surface-hover);
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--nx-color-text-muted);
+    }
+
+    button {
+      padding: 0.375rem 0.75rem;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.75rem;
+      background: var(--nx-color-action-primary);
+      color: white;
+      border: none;
+      transition: background 120ms cubic-bezier(0.2, 0, 0.13, 1);
+    }
+
+    button:hover {
+      background: var(--nx-color-action-primary-hover);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        grid-template-columns: 80px 1fr 50px;
+        gap: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <div>
+          <h1>Operations Dashboard</h1>
+          <p class="subtitle">Clinical orders & workflow metrics</p>
+        </div>
+        <div class="user-card">
+          <span class="user-email">Dr. Aminata Sesay</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- KPI Cards -->
+      <section class="status-cards">
+        <div class="stat-card">
+          <div class="stat-label">Revenue (MTD)</div>
+          <div class="stat-value">$87,492</div>
+          <div class="stat-delta">+12% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed Orders</div>
+          <div class="stat-value">147</div>
+          <div class="stat-delta">Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending Orders</div>
+          <div class="stat-value">23</div>
+          <div class="stat-delta">Avg wait: 12 min</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Cancellations</div>
+          <div class="stat-value">8</div>
+          <div class="stat-delta">0.8% of total</div>
+        </div>
+      </section>
+
+      <!-- Charts Grid -->
+      <section class="charts-grid">
+        <div class="chart-card">
+          <h3 class="chart-title">Orders by Status</h3>
+          <div class="chart">
+            <div class="bar-row">
+              <div class="bar-label">Completed</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 85%; background: var(--nx-color-status-success);"></div>
+              </div>
+              <div class="bar-value">147</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">In Progress</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 45%; background: var(--nx-color-status-warning);"></div>
+              </div>
+              <div class="bar-value">23</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">On Hold</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 25%; background: #ab7510;"></div>
+              </div>
+              <div class="bar-value">8</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Cancelled</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 15%; background: var(--nx-color-clinical-critical);"></div>
+              </div>
+              <div class="bar-value">3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <h3 class="chart-title">Cancellation Breakdown</h3>
+          <div class="stacked-bar">
+            <div class="stack-segment" style="flex: 5; background: #ee9494;">Patient request</div>
+            <div class="stack-segment" style="flex: 2; background: var(--nx-color-clinical-critical);">Tech absent</div>
+            <div class="stack-segment" style="flex: 1; background: #ab7510;">Equipment</div>
+          </div>
+          <div class="stacked-legend">
+            <div><span class="legend-dot" style="background: #ee9494;"></span> Patient: 5</div>
+            <div><span class="legend-dot" style="background: var(--nx-color-clinical-critical);"></span> Tech: 2</div>
+            <div><span class="legend-dot" style="background: #ab7510;"></span> Equipment: 1</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trend Chart -->
+      <section>
+        <h3 class="chart-title">Daily Orders Trend</h3>
+        <div class="chart-card">
+          <div class="trend-chart">
+            <svg viewBox="0 0 300 100" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="gradMint" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color: var(--nx-color-status-success); stop-opacity: 0.3;" />
+                  <stop offset="100%" style="stop-color: var(--nx-color-status-success); stop-opacity: 0.05;" />
+                </linearGradient>
+              </defs>
+              <polyline points="0,70 30,45 60,52 90,35 120,40 150,30 180,42 210,25 240,50 270,35 300,55" fill="none" stroke="var(--nx-color-status-success)" stroke-width="2" />
+              <polygon points="0,70 30,45 60,52 90,35 120,40 150,30 180,42 210,25 240,50 270,35 300,55 300,100 0,100" fill="url(#gradMint)" />
+            </svg>
+          </div>
+          <div class="trend-legend">
+            <div><span class="legend-dot" style="background: var(--nx-color-status-success);"></span> Completed</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Orders Requiring Attention -->
+      <section>
+        <h2>Orders Requiring Attention</h2>
+        <div class="table">
+          <div class="table-head">
+            <div>Order ID</div>
+            <div>Current Step</div>
+            <div>Time Stuck</div>
+            <div>Status</div>
+            <div>Action</div>
+          </div>
+          <div class="table-body">
+            <div class="table-row">
+              <div><span class="mono">ORD-10427</span></div>
+              <div>Pharmacy creation</div>
+              <div><span class="mono">2h 15m</span></div>
+              <div>🔴 Critical</div>
+              <div><button>Review</button></div>
+            </div>
+            <div class="table-row">
+              <div><span class="mono">ORD-10431</span></div>
+              <div>Clinician review</div>
+              <div><span class="mono">51m</span></div>
+              <div>⚠ High</div>
+              <div><button>Review</button></div>
+            </div>
+            <div class="table-row">
+              <div><span class="mono">ORD-10439</span></div>
+              <div>Shipped</div>
+              <div><span class="mono">48m</span></div>
+              <div>⚠ High</div>
+              <div><button>Review</button></div>
+            </div>
+            <div class="table-row">
+              <div><span class="mono">ORD-10423</span></div>
+              <div>Clinician review</div>
+              <div><span class="mono">38m</span></div>
+              <div>—</div>
+              <div><button>Review</button></div>
+            </div>
+            <div class="table-row">
+              <div><span class="mono">ORD-10375</span></div>
+              <div>Pharmacy creation</div>
+              <div><span class="mono">29m</span></div>
+              <div>—</div>
+              <div><button>Review</button></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Workflow Performance -->
+      <section>
+        <h2>Avg Time Between Steps (minutes)</h2>
+        <div class="chart-card">
+          <div class="chart">
+            <div class="bar-row">
+              <div class="bar-label">Intake → Review</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 35%; background: #8763cb;"></div>
+              </div>
+              <div class="bar-value">8.4m</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Review → Pharmacy</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 65%; background: var(--nx-color-clinical-critical);"></div>
+              </div>
+              <div class="bar-value">16.2m</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Pharmacy → Ship</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 55%; background: #ee9494;"></div>
+              </div>
+              <div class="bar-value">14.0m</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Ship → Delivery</div>
+              <div class="bar-container">
+                <div class="bar" style="width: 95%; background: var(--nx-color-status-warning);"></div>
+              </div>
+              <div class="bar-value">24.5m</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

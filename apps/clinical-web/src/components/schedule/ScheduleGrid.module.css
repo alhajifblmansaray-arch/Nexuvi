@@ -1,0 +1,360 @@
+.scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.grid {
+  display: grid;
+  /* Fixed minimum column width: squeezing eight clinicians into the viewport makes every
+     appointment card unreadable. Past that the container scrolls, which is the honest
+     trade for a dense day. */
+  grid-template-columns: 3.5rem repeat(var(--column-count), minmax(11rem, 1fr));
+  min-width: min-content;
+}
+
+/* Time gutter ----------------------------------------------------------- */
+
+.gutter {
+  position: relative;
+  border-right: 1px solid var(--nx-color-border-subtle);
+}
+
+.gutterHead {
+  border-right: none;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--nx-color-surface-raised);
+}
+
+.gutterLabel {
+  position: absolute;
+  right: var(--space-2);
+  transform: translateY(-50%);
+  font-size: 0.625rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+}
+
+/* Column header --------------------------------------------------------- */
+
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1875rem;
+  padding: var(--space-3);
+  background: var(--nx-color-surface-raised);
+  border-bottom: 1px solid var(--nx-color-border-default);
+  border-left: 1px solid var(--nx-color-border-subtle);
+}
+
+.headTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.headName {
+  font-size: 0.8125rem;
+  font-weight: 620;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.headConflicts {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.25rem;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-status-danger);
+  color: var(--nx-color-text-on-status);
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+.headRole {
+  font-size: 0.625rem;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.headMeter {
+  height: 0.25rem;
+  margin-top: 0.125rem;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-surface-sunken);
+  overflow: hidden;
+}
+
+.headMeterFill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-status-success);
+}
+
+/* Near-full is worth noticing before it becomes a problem. */
+.headMeterFill[data-busy='true'] {
+  background: var(--nx-color-status-warning);
+}
+
+.headStats {
+  font-size: 0.625rem;
+  color: var(--nx-color-text-muted);
+}
+
+/* Column body ----------------------------------------------------------- */
+
+.column {
+  position: relative;
+  border-left: 1px solid var(--nx-color-border-subtle);
+  /* The page background shows through wherever there is no coverage band — that is what
+     "nobody is working" looks like. */
+  background: var(--nx-color-surface-page);
+}
+
+.rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--nx-color-border-subtle);
+  pointer-events: none;
+}
+
+/* Coverage bands -------------------------------------------------------- */
+
+.band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+/* On shift: a raised surface. Quiet, because it is the backdrop, not the content. */
+.band[data-kind='shift'] {
+  background: var(--nx-color-surface-raised);
+}
+
+/* Break and unavailable are drawn as hatching rather than a flat fill: a solid grey block
+   reads as "something is booked here", which is the opposite of what it means. */
+.band[data-kind='break'],
+.band[data-kind='unavailable'] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--nx-color-surface-sunken);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    color-mix(in srgb, var(--nx-color-border-default) 45%, transparent) 5px,
+    color-mix(in srgb, var(--nx-color-border-default) 45%, transparent) 10px
+  );
+}
+
+.bandLabel {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--nx-color-text-muted);
+  background: var(--nx-color-surface-sunken);
+  padding: 0.0625rem 0.375rem;
+  border-radius: var(--radius-full);
+}
+
+/* Appointments ---------------------------------------------------------- */
+
+.appointment {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+  overflow: hidden;
+  padding: 0.25rem 0.375rem 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--nx-color-border-subtle);
+  background: var(--nx-color-surface-raised);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+/* Severity rides the leading edge, leaving the card itself neutral so a dense grid does
+   not turn into a wall of competing colour. */
+.appointment::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--stripe);
+}
+
+.appointment:hover {
+  box-shadow: var(--shadow-md);
+  z-index: 1;
+}
+
+.appointmentTime {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: var(--nx-color-text-secondary);
+}
+
+.appointmentPatient {
+  font-size: 0.6875rem;
+  font-weight: 620;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appointmentService {
+  font-size: 0.625rem;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appointmentFlags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.125rem;
+  margin-top: 0.0625rem;
+}
+
+.flag {
+  padding: 0 0.25rem;
+  border-radius: var(--radius-full);
+  font-size: 0.5625rem;
+  font-weight: 650;
+  white-space: nowrap;
+  border: 1px solid currentColor;
+}
+
+/* Locked clinical tokens (§19.1) — never tenant-overridable, and never the operational
+   severity scale used by the stripe. */
+.flag[data-kind='allergy'] {
+  color: var(--nx-color-clinical-allergy);
+  background: var(--nx-color-clinical-allergy-subtle);
+}
+
+.flag[data-kind='critical-result'] {
+  color: var(--nx-color-clinical-critical);
+  background: var(--nx-color-clinical-critical-subtle);
+}
+
+.flag[data-kind='controlled-substance'] {
+  color: var(--nx-color-clinical-controlled);
+}
+
+.flag[data-kind='infection-control'] {
+  color: var(--nx-color-clinical-sensitive);
+}
+
+/* A short booking cannot fit four lines, so it keeps the two that identify it. */
+.appointment[data-compact='true'] {
+  padding-top: 0.125rem;
+}
+
+.appointment[data-compact='true'] .appointmentService,
+.appointment[data-compact='true'] .appointmentFlags {
+  display: none;
+}
+
+/* Status ---------------------------------------------------------------- */
+
+.appointment[data-status='arrived'] {
+  border-color: var(--nx-color-status-success);
+}
+
+.appointment[data-status='in-progress'] {
+  border-color: var(--nx-color-status-info);
+  background: var(--nx-color-status-info-subtle);
+}
+
+.appointment[data-status='completed'] {
+  opacity: 0.65;
+}
+
+/* Cancelled keeps its slot visible — the time is free again, and a gap would hide that
+   anything was ever there. */
+.appointment[data-status='cancelled'] {
+  opacity: 0.5;
+  background: var(--nx-color-surface-sunken);
+  box-shadow: none;
+}
+
+.appointment[data-status='cancelled'] .appointmentPatient {
+  text-decoration: line-through;
+}
+
+.appointment[data-status='no-show'] {
+  border-style: dashed;
+  border-color: var(--nx-color-status-warning);
+}
+
+.appointment[data-conflict='true'] {
+  border-color: var(--nx-color-status-danger);
+  border-width: 1.5px;
+  z-index: 1;
+}
+
+.conflictMark {
+  color: var(--nx-color-status-danger);
+  font-size: 0.6875rem;
+  line-height: 1;
+}
+
+/* Empty state ----------------------------------------------------------- */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+  padding: var(--space-8) var(--space-6);
+}
+
+.emptyTitle {
+  font-size: 0.9375rem;
+  font-weight: 620;
+}
+
+.emptyDetail {
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+  max-width: 32rem;
+  text-wrap: pretty;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,189 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.back {
+  font-size: 0.75rem;
+  font-weight: 550;
+  color: var(--nx-color-text-secondary);
+}
+
+.back:hover {
+  color: var(--nx-color-text-primary);
+}
+
+/* Facts ---------------------------------------------------------------- */
+
+.facts {
+  display: flex;
+  flex-direction: column;
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+}
+
+.fact:first-child {
+  padding-top: 0;
+}
+
+.fact:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.fact dt {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--nx-color-text-muted);
+}
+
+.fact dd {
+  font-size: 0.8125rem;
+  text-wrap: pretty;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--nx-color-text-muted);
+}
+
+.unassigned {
+  color: var(--nx-color-text-disabled);
+  font-style: italic;
+}
+
+.muted {
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+  text-wrap: pretty;
+}
+
+/* Flags ---------------------------------------------------------------- */
+
+.flagList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+}
+
+.flagRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
+}
+
+.flagDetail {
+  font-size: 0.75rem;
+  color: var(--nx-color-text-muted);
+}
+
+/* Audit trail ---------------------------------------------------------- */
+
+.history {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.historyRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: var(--space-3) 0 var(--space-3) var(--space-4);
+  border-left: 2px solid var(--nx-color-border-default);
+  position: relative;
+}
+
+.historyRow::before {
+  content: '';
+  position: absolute;
+  left: -0.3125rem;
+  top: 1.0625rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-action-primary);
+}
+
+/* The most recent entry anchors the line; older ones continue it. */
+.historyRow:first-child {
+  padding-top: 0;
+}
+
+.historyRow:first-child::before {
+  top: 0.25rem;
+}
+
+.historyRow:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.historyHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.historyAction {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.historyTime {
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+}
+
+.historyActor {
+  font-size: 0.75rem;
+  color: var(--nx-color-text-secondary);
+}
+
+.historyChange {
+  font-size: 0.75rem;
+  color: var(--nx-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.historyReason {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--nx-color-text-secondary);
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+@media (max-width: 64rem) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fact {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
+  }
+}

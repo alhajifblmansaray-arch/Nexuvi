@@ -1,0 +1,125 @@
+/* Wide tables scroll inside their own container so the page body never does. */
+.scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.table thead th {
+  padding: var(--space-2) var(--space-4);
+  text-align: left;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--nx-color-text-muted);
+  background: var(--nx-color-surface-sunken);
+  border-block: 1px solid var(--nx-color-border-subtle);
+}
+
+.table tbody td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: var(--nx-color-surface-hover);
+}
+
+/* First cell carries the severity stripe, so it needs room for it. */
+.table tbody td:first-child {
+  position: relative;
+  padding-left: var(--space-5);
+}
+
+.stripe {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+}
+
+.reference {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.patient {
+  display: block;
+  font-weight: 550;
+}
+
+.patientId {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+}
+
+.muted {
+  color: var(--nx-color-text-secondary);
+}
+
+.unassigned {
+  color: var(--nx-color-text-disabled);
+  font-style: italic;
+}
+
+.waiting {
+  font-weight: 620;
+}
+
+.waiting[data-overdue='true'] {
+  color: var(--nx-color-status-danger);
+}
+
+.reason {
+  display: block;
+  margin-top: 0.1875rem;
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+  max-width: 16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actionCell {
+  text-align: right;
+}
+
+.action {
+  padding: 0.3125rem 0.75rem;
+  border-radius: var(--radius-md);
+  background: var(--nx-color-action-primary);
+  color: var(--nx-color-text-on-action);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.action:hover {
+  background: var(--nx-color-action-primary-hover);
+}
+
+.empty {
+  padding: var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+}
+
+/* `.action` is a link now, not a button, so it needs the button's box back. */
+a.action {
+  display: inline-block;
+  text-align: center;
+}

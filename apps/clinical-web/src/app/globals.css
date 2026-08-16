@@ -1,0 +1,113 @@
+/*
+ * Global reset and base typography.
+ *
+ * Colour values never appear in this file — everything resolves through the semantic
+ * custom properties emitted by `layout.tsx`. A raw hex here would be a decision that
+ * tenant theming and dark mode both need to be able to change (ADR 0002).
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Sticky headers inside scroll containers need this to land below the top bar. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--nx-color-text-primary);
+  background: var(--nx-color-surface-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  letter-spacing: -0.011em;
+  text-wrap: balance;
+}
+
+/*
+ * Every figure that sits in a column — counts, durations, money, identifiers — uses
+ * tabular figures so digits align vertically and a number changing on refresh doesn't
+ * shift the ones beside it.
+ */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Focus is never removed, only replaced. Ward machines are used with keyboards and
+ * trackballs as often as mice.
+ */
+:focus-visible {
+  outline: 2px solid var(--nx-color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Visually hidden but available to assistive technology. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+::selection {
+  background: var(--nx-color-surface-selected);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

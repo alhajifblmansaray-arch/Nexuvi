@@ -1,0 +1,42 @@
+/*
+ * Portal base styles.
+ *
+ * No colour literals — everything resolves through the tenant stylesheet emitted by the
+ * API. A hex here would be a decision a clinic's branding could not reach.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--nx-color-text-primary, #131619);
+  background: var(--nx-color-surface-page, #fafafa);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-weight: 640; letter-spacing: -0.015em; text-wrap: balance; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--nx-color-border-focus);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
+/* Patient-facing type is a step larger than the clinical workspace throughout. The people
+   reading this are unwell, on phones, sometimes elderly — the workspace's density is a
+   trade staff make knowingly and patients never agreed to. */
+.unbranded {
+  max-width: 32rem;
+  margin: 4rem auto;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

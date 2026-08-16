@@ -6,14 +6,16 @@
   "types": "dist/main.d.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "swc src -d dist --strip-leading-paths",
     "start": "node dist/main.js",
-    "dev": "tsx watch src/main.ts",
+    "dev": "node --import @swc-node/register/esm-register --watch src/main.ts",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/**/*.test.ts",
+    "test": "node --import @swc-node/register/esm-register --test 'src/**/*.test.ts'",
     "test:db": "tsx scripts/test-db.ts",
     "db:migrate": "tsx scripts/migrate.ts",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+    "start:dev": "node --import @swc-node/register/esm-register src/main.ts",
+    "provision": "node --import @swc-node/register/esm-register scripts/provision.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.0",
@@ -22,6 +24,8 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.3.0",
     "@nestjs/typeorm": "^10.0.0",
+    "@nexuvi/api-contracts": "workspace:*",
+    "@nexuvi/design-system": "workspace:*",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "pg": "^8.11.3",
@@ -29,6 +33,11 @@
     "typeorm": "^0.3.19"
   },
   "devDependencies": {
+    "@nestjs/testing": "^11.1.29",
+    "@swc-node/register": "^1.12.1",
+    "@swc/cli": "^0.8.1",
+    "@swc/core": "^1.15.47",
+    "@types/express": "^5.0.6",
     "@types/node": "^22.10.2",
     "tsx": "^4.17.0",
     "typescript": "^5.7.2"

@@ -3,17 +3,19 @@
   "version": "0.0.0",
   "description": "Nexuvi clinical workspace: encounters, orders, prescriptions, results",
   "scripts": {
-    "dev": "next dev",
+    "dev": "STAFF_HOST=bo-childrens.app.nexuvi.health next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@nexuvi/api-contracts": "workspace:*",
     "@nexuvi/design-system": "workspace:*",
     "next": "^15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

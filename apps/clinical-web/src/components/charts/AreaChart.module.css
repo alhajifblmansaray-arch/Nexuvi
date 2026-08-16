@@ -1,0 +1,28 @@
+.figure {
+  width: 100%;
+  min-width: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--nx-color-border-subtle);
+  stroke-width: 1;
+}
+
+.axisLabel {
+  fill: var(--nx-color-text-muted);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  color: var(--nx-color-text-muted);
+  font-size: 0.8125rem;
+}

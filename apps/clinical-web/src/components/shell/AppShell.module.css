@@ -1,0 +1,75 @@
+.shell {
+  display: flex;
+  min-height: 100dvh;
+  background: var(--nx-color-surface-page);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* Lets wide tables scroll inside the column instead of stretching it. */
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  padding: var(--space-5) var(--space-6);
+  background: color-mix(in srgb, var(--nx-color-surface-page) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.title {
+  font-size: 1.375rem;
+  font-weight: 640;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.main {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (max-width: 60rem) {
+  .shell {
+    flex-direction: column;
+  }
+
+  .topbar {
+    position: static;
+    padding: var(--space-4);
+  }
+
+  .main {
+    padding: var(--space-4);
+    gap: var(--space-4);
+  }
+}

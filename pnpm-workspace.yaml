@@ -2,7 +2,17 @@ packages:
   - "apps/*"
   - "services/*"
   - "packages/*"
+
+# Postinstall scripts are opt-in. Every entry below is a deliberate decision, not a
+# blanket approval — an install script runs arbitrary code with the developer's
+# privileges, and a healthcare codebase is a poor place to grant that by default.
+#
+# All four are `false`: each ships prebuilt platform binaries as optional dependencies,
+# so their install script is either a no-op on this platform or a funding notice.
+# Verified working without them. If a native rebuild is ever genuinely required — a new
+# architecture, or a source-only install — flip the specific entry and record why here.
 allowBuilds:
-  '@nestjs/core': set this to true or false
-  esbuild: set this to true or false
-  sharp: set this to true or false
+  '@nestjs/core': false # Postinstall prints a funding message only.
+  '@swc/core': false # Prebuilt @swc/core-<platform> resolves instead.
+  esbuild: false # Prebuilt @esbuild/<platform> resolves instead.
+  sharp: false # Prebuilt @img/sharp-<platform> resolves instead.

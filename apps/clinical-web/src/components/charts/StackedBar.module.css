@@ -1,0 +1,77 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.bar {
+  display: flex;
+  gap: 2px;
+  height: 1.75rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.segment {
+  flex-basis: 0;
+  min-width: 2px;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.legendRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  font-size: 0.75rem;
+  color: var(--nx-color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.legendValue {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 620;
+}
+
+.legendShare {
+  min-width: 2.25rem;
+  text-align: right;
+  font-weight: 500;
+  color: var(--nx-color-text-muted);
+}
+
+.total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--nx-color-border-subtle);
+  font-size: 0.75rem;
+  font-weight: 620;
+}
+
+.empty {
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+}

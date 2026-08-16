@@ -1,0 +1,209 @@
+/*
+ * Split sign-in.
+ *
+ * The left panel is the clinic's; the right is the platform's. That division is the point
+ * — a clinician should recognise whose system this is at a glance, and the form itself
+ * should look the same everywhere so muscle memory survives working at two customers.
+ */
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100dvh;
+}
+
+/* Clinic panel ------------------------------------------------------------- */
+
+.brandPanel {
+  position: relative;
+  display: flex;
+  padding: var(--space-8) var(--space-6);
+  /* The clinic's colour, already contrast-validated server-side. */
+  background: var(--nx-color-action-primary);
+  color: var(--nx-color-text-on-action);
+  overflow: hidden;
+}
+
+/* A quiet depth wash so a flat brand colour does not read as a solid block. */
+.brandPanel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 80% at 20% 15%,
+    rgb(255 255 255 / 0.14),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.brandInner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.wordmark {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brandBody { display: flex; flex-direction: column; gap: var(--space-3); }
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.75;
+}
+
+.brandTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 640;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.brandTagline {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  opacity: 0.85;
+  max-width: 26rem;
+  text-wrap: pretty;
+}
+
+/* Stated plainly rather than as a warning banner. It is a standing fact about the
+   system, and dressing it as an alert trains people to dismiss it. */
+.brandFooter {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  max-width: 26rem;
+  text-wrap: pretty;
+}
+
+/* Form panel --------------------------------------------------------------- */
+
+.formPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  background: var(--nx-color-surface-page);
+}
+
+.card {
+  width: 100%;
+  max-width: 24rem;
+  padding: var(--space-6);
+  background: var(--nx-color-surface-raised);
+  border: 1px solid var(--nx-color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 640;
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+
+.form { display: flex; flex-direction: column; gap: var(--space-4); }
+.field { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.label { font-size: 0.8125rem; font-weight: 600; }
+
+.input {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--nx-color-border-default);
+  background: var(--nx-color-surface-page);
+  font-size: 0.9375rem;
+}
+
+.passwordWrap { position: relative; display: block; }
+
+/* Padded so the input's text never runs under the button. */
+.passwordWrap .input { padding-right: 4rem; }
+
+.reveal {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--nx-color-text-secondary);
+}
+
+.reveal:hover { background: var(--nx-color-surface-hover); color: var(--nx-color-text-primary); }
+
+.submit {
+  width: 100%;
+  margin-top: var(--space-1);
+  padding: 0.8125rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--nx-color-action-primary);
+  color: var(--nx-color-text-on-action);
+  font-size: 0.9375rem;
+  font-weight: 620;
+}
+
+.submit:hover:not(:disabled) { background: var(--nx-color-action-primary-hover); }
+.submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.error {
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--nx-color-status-danger);
+  background: var(--nx-color-status-danger-subtle);
+  color: var(--nx-color-status-danger);
+  font-size: 0.8125rem;
+  font-weight: 550;
+  text-wrap: pretty;
+}
+
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--nx-color-border-subtle);
+}
+
+.help {
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+  text-wrap: pretty;
+}
+
+.pageFooter { font-size: 0.75rem; color: var(--nx-color-text-muted); }
+
+/* On a phone the brand panel becomes a header rather than half the screen —
+   the form is what the person came for. */
+@media (max-width: 52rem) {
+  .page { grid-template-columns: 1fr; }
+
+  .brandPanel { padding: var(--space-6) var(--space-5); }
+  .brandInner { gap: var(--space-5); }
+  .brandTitle { font-size: 1.75rem; }
+  .brandFooter { display: none; }
+
+  .formPanel { justify-content: flex-start; padding-top: var(--space-6); }
+}

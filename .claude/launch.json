@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "clinical-web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@nexuvi/clinical-web",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "core-api",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@nexuvi/core-api",
+        "dev"
+      ],
+      "port": 3001
+    },
+    {
+      "name": "patient-portal",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@nexuvi/patient-portal",
+        "dev"
+      ],
+      "port": 3002
+    }
+  ]
+}

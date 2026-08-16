@@ -31,3 +31,6 @@ Thumbs.db
 # Never allow real clinical data anywhere in the tree (§26.3)
 *.phi
 /tmp/
+
+# Trial data snapshot (memory driver durability)
+.nexuvi/

@@ -1,0 +1,23 @@
+{
+  "name": "@nexuvi/patient-portal",
+  "version": "0.0.0",
+  "description": "White-label patient portal. One deployment, branded per clinic at runtime.",
+  "scripts": {
+    "dev": "PORTAL_HOST=freetown-family-group.nexuvi.health next dev --port 3002",
+    "build": "next build",
+    "start": "next start --port 3002",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nexuvi/api-contracts": "workspace:*",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.7.2"
+  }
+}

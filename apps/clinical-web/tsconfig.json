@@ -2,8 +2,32 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+
+    // Browser globals. The base config ships ES2023 only, which leaves `fetch` typed from
+    // Node's undici and missing the `cache` option Next relies on for its data layer.
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+
+    // The workspace packages are consumed as TypeScript source, and their internal imports
+    // carry explicit `.ts` extensions (correct for Node ESM). Next transpiles them, so
+    // nothing is emitted from here and the extensions never reach a runtime.
+    "allowImportingTsExtensions": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

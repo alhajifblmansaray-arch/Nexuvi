@@ -1,0 +1,103 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+}
+
+.row:first-child {
+  padding-top: 0;
+}
+
+.row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.row[data-dimmed='true'] {
+  opacity: 0.55;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.3125rem;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.0625rem;
+  min-width: 0;
+}
+
+.primary {
+  font-size: 0.8125rem;
+  font-weight: 550;
+}
+
+.secondary {
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Alert detail is a sentence, so it wraps instead of truncating. */
+.secondaryWrap {
+  font-size: 0.6875rem;
+  color: var(--nx-color-text-muted);
+  text-wrap: pretty;
+}
+
+.trailing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.0625rem;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.state {
+  font-size: 0.6875rem;
+  font-weight: 620;
+  white-space: nowrap;
+}
+
+.pending,
+.time {
+  font-size: 0.625rem;
+  color: var(--nx-color-text-muted);
+  white-space: nowrap;
+}
+
+.summary {
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-1);
+  border-bottom: 1px solid var(--nx-color-border-subtle);
+  font-size: 0.75rem;
+  color: var(--nx-color-text-muted);
+}
+
+.summary strong {
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: var(--nx-color-text-primary);
+}
+
+.empty {
+  font-size: 0.8125rem;
+  color: var(--nx-color-text-muted);
+}
