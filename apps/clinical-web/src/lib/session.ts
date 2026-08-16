@@ -21,7 +21,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001/api';
 /**
  * The clinic host this request arrived on.
  *
- * Staff surfaces live at `{slug}.app.nexuvi.health`. In development the browser hits
+ * Staff surfaces live at `{slug}-app.nexuvi.health`. In development the browser hits
  * `localhost`, which is not a clinic, so `STAFF_HOST` pins one — a development convenience
  * only. In production the real `Host` header is a clinic domain and nothing reads this.
  */

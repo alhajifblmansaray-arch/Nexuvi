@@ -232,10 +232,10 @@ It prints the administrator's setup link. **That link is shown once** — nothin
 plaintext token, so it cannot be recovered afterwards.
 
 **3. Point the clinical app at the new clinic.** Staff surfaces are per-clinic hostnames
-(`{slug}.app.nexuvi.health`); locally there is no DNS, so pin one:
+(`{slug}-app.nexuvi.health`); locally there is no DNS, so pin one:
 
 ```bash
-STAFF_HOST=bo-childrens.app.nexuvi.health pnpm --filter @nexuvi/clinical-web dev
+STAFF_HOST=bo-childrens-app.nexuvi.health pnpm --filter @nexuvi/clinical-web dev
 ```
 
 **4. Open the setup link** at `http://localhost:3000/setup?invite=…`. Set a password, brand

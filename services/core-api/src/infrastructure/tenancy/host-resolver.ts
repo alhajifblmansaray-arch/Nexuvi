@@ -36,14 +36,23 @@ export class HostResolver {
   }
 
   /**
-   * Staff surfaces live on their own subdomain: `{slug}.app.nexuvi.health`.
+   * Staff surfaces live on their own subdomain: `{slug}-app.nexuvi.health`.
    *
    * A separate origin from the patient portal on purpose. Cookies, storage, and service
    * workers are scoped per origin, so a staff session and a patient session on the same
    * host would share a cookie jar — and a patient landing on a clinic's administration
    * screen is a confusion the URL should prevent rather than the UI apologise for.
+   *
+   * A hyphen rather than a dot keeps every tenant hostname exactly one label deep, which
+   * is all a wildcard certificate covers: `*.nexuvi.health` matches `clinic-app` but not
+   * `clinic.app`. The dotted form needs a multi-level wildcard — a paid certificate on
+   * every provider — and without one the TLS handshake fails before any request is made.
+   *
+   * The cost is that the suffix is now expressible inside a slug, so `RESERVED_SLUGS`
+   * refuses slugs ending in `-app`; otherwise `wellness-app`'s portal would resolve as
+   * `wellness`'s staff surface.
    */
-  private static readonly STAFF_INFIX = '.app';
+  private static readonly STAFF_INFIX = '-app';
 
   /**
    * Custom domains, verified at provisioning time.

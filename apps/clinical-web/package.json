@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Nexuvi clinical workspace: encounters, orders, prescriptions, results",
   "scripts": {
-    "dev": "STAFF_HOST=bo-childrens.app.nexuvi.health next dev",
+    "dev": "STAFF_HOST=bo-childrens-app.nexuvi.health next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

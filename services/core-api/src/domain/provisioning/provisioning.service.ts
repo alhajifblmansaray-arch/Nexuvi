@@ -76,6 +76,16 @@ export class ProvisioningService {
     if (RESERVED_SLUGS.has(normalised)) {
       return { slug: normalised, available: false, reason: 'This name is reserved by the platform.' };
     }
+    // `{slug}-app` is the staff surface. A tenant holding a slug that ends in `-app` would
+    // own a portal hostname that routes to another tenant's administration screens.
+    if (normalised.endsWith('-app')) {
+      return {
+        slug: normalised,
+        available: false,
+        reason: 'Names ending in “-app” are reserved for staff sign-in.',
+        suggestion: `${normalised.slice(0, -'-app'.length)}-clinic`,
+      };
+    }
     if (findTenantBySlug(normalised)) {
       return {
         slug: normalised,
@@ -184,7 +194,7 @@ export class ProvisioningService {
       // nothing stores the plaintext, so it cannot be retrieved later.
       // The staff subdomain, not the patient portal. Administration and patient-facing
       // surfaces are deliberately different origins.
-      setupUrl: `https://${slug}.app.${this.domain}/setup?invite=${invitation.token}`,
+      setupUrl: `https://${slug}-app.${this.domain}/setup?invite=${invitation.token}`,
       inviteExpiresAt: invitation.expiresAt,
       plan: plan.key,
       template: template.key,

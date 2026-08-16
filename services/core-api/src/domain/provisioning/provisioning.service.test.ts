@@ -136,6 +136,14 @@ describe('ProvisioningService', () => {
       }
     });
 
+    // `{slug}-app` is the staff hostname, so a slug ending in `-app` would give one tenant
+    // a portal address that resolves to another tenant's administration screens.
+    it('refuses slugs ending in the staff suffix', () => {
+      const check = provisioning.checkSlug('wellness-app');
+      assert.equal(check.available, false);
+      assert.match(check.reason ?? '', /staff/i);
+    });
+
     it('refuses malformed slugs', () => {
       for (const bad of ['ab', '-leading', 'trailing-', 'Has Capitals', 'has_underscore', 'a'.repeat(70)]) {
         assert.equal(provisioning.checkSlug(bad).available, false, bad);

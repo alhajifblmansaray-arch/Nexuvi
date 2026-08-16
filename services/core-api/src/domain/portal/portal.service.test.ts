@@ -152,8 +152,8 @@ describe('BrandingService', () => {
 describe('HostResolver', () => {
   it('maps a clinic staff subdomain to the same tenant', () => {
     // Same customer, different origin: patients at {slug}, staff at {slug}.app.
-    assert.equal(hosts.resolve('freetown-family-group.app.nexuvi.health'), FREETOWN_GROUP);
-    assert.equal(hosts.isStaffHost('freetown-family-group.app.nexuvi.health'), true);
+    assert.equal(hosts.resolve('freetown-family-group-app.nexuvi.health'), FREETOWN_GROUP);
+    assert.equal(hosts.isStaffHost('freetown-family-group-app.nexuvi.health'), true);
     assert.equal(hosts.isStaffHost('freetown-family-group.nexuvi.health'), false);
   });
 
@@ -193,7 +193,7 @@ describe('HostResolver', () => {
     );
 
     assert.equal(elsewhere.resolve('freetown-family-group.nexuvi.app'), FREETOWN_GROUP);
-    assert.equal(elsewhere.isStaffHost('freetown-family-group.app.nexuvi.app'), true);
+    assert.equal(elsewhere.isStaffHost('freetown-family-group-app.nexuvi.app'), true);
     assert.equal(elsewhere.resolve('app.nexuvi.app'), undefined);
 
     // And the old domain stops resolving, rather than both working.
