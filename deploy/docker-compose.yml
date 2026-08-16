@@ -1,0 +1,57 @@
+services:
+  app:
+    image: node:22-alpine
+    working_dir: /app
+    command:
+      - sh
+      - -c
+      - |
+        apk add --no-cache git &&
+        if [ -d .git ]; then git fetch --all && git reset --hard origin/main; \
+        else git clone https://github.com/alhajifblmansaray-arch/Nexuvi.git . ; fi &&
+        npm install -g pnpm &&
+        pnpm install &&
+        pnpm build &&
+        {
+          pnpm --filter @nexuvi/core-api start &
+          pnpm --filter @nexuvi/clinical-web start &
+          pnpm --filter @nexuvi/patient-portal start &
+          wait
+        }
+    # Bound to the loopback interface, not published to the internet. Every API call is made
+    # by the Next server inside this container, so nothing outside needs to reach these —
+    # and an exposed :3001 would put the dev-token endpoint on the public internet.
+    ports:
+      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:3001:3001"
+      - "127.0.0.1:3002:3002"
+    environment:
+      # Not `production`: this deployment serves fixture data from memory and signs its own
+      # tokens. The config service refuses that combination under NODE_ENV=production, and
+      # it is right to — see deploy/README.md.
+      - NODE_ENV=development
+      - PLATFORM_DOMAIN=nexuvi.health
+      - DATA_DRIVER=memory
+      - AUTH_MODE=dev
+      - SNAPSHOT_PERSISTENCE=true
+      - DEV_TOKEN_SECRET=${DEV_TOKEN_SECRET:?set DEV_TOKEN_SECRET in deploy/.env}
+      - NEXT_PUBLIC_API_URL=http://127.0.0.1:3001/api
+      - CORS_ORIGINS=https://nexuvi.health,https://app.nexuvi.health
+    volumes:
+      - trial-data:/app/services/core-api/.nexuvi
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    restart: unless-stopped
+
+volumes:
+  trial-data:

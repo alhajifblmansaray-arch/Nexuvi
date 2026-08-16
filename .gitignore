@@ -34,3 +34,7 @@ Thumbs.db
 
 # Trial data snapshot (memory driver durability)
 .nexuvi/
+
+# Deployment secrets — TLS private keys and env files must never be committed.
+deploy/ssl/
+deploy/.env
