@@ -7,6 +7,6 @@
     "keepClassNames": true,
     "baseUrl": "."
   },
-  "module": { "type": "es6", "resolveFully": false },
+  "module": { "type": "es6", "resolveFully": true },
   "sourceMaps": true
 }
